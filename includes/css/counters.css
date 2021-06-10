@@ -1,0 +1,9 @@
+#counter_widgets label {
+    display: inline-block;
+    width: 15%;
+    text-align: left;
+}
+#widget_list ul {
+    border: 1px solid #c0c0c0;
+    padding: 15px 10px 5px;
+}
