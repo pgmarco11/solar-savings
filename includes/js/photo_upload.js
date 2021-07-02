@@ -7,8 +7,6 @@ jQuery(document).ready(function($){
 
                 $('.my_upl_button' + i).click(function(e) {
 
-                alert('you clicked ' + i);
-
                 e.preventDefault();
 
                 let currentfile = document.getElementsByClassName('image_url'+i).value;

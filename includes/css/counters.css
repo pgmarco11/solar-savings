@@ -3,6 +3,9 @@
     width: 15%;
     text-align: left;
 }
+#tickerNum1, #totalAmt1,#tickerNum2, #totalAmt2,#tickerNum3, #totalAmt3,#tickerNum4, #totalAmt4 {
+    display: inline;
+}
 #widget_list ul {
     border: 1px solid #c0c0c0;
     padding: 15px 10px 5px;
