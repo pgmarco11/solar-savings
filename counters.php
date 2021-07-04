@@ -121,140 +121,119 @@ function pg_counter_settings(){
 
 		</div>					
 
-		<script type="text/javascript">
+		<script type="text/javascript">				
 
-					let showWidgets = document.getElementById("widget_list");
-					let widgetID = document.getElementById("widget_id").value;
-					widgetID = parseInt(widgetID);
-
-					<?php
-					$start_date = strtotime($starting_date);
-					$now_date = strtotime("now");	
-					$starting_number = floatval($starting_number);					
-					$increment_number = floatVal($increment_number);	
-					$differenceSeconds = $now_date - $start_date;				
-					$savings_number = ( ($differenceSeconds * $increment_number) + $starting_number);
-					?>	
+				
+				let showWidgets = document.getElementById("widget_list");
+				let widgetID = document.getElementById("widget_id").value;
+				widgetID = parseInt(widgetID);
 					
-					function changeWidgets(){
+	
+				<?php
+						$start_date = strtotime($starting_date);
+						$now_date = strtotime("now");	
+						$starting_number = floatval($starting_number);					
+						$increment_number = floatVal($increment_number);	
+						$differenceSeconds = $now_date - $start_date;				
+						$savings_number = ( ($differenceSeconds * $increment_number) + $starting_number);
+					?>
 
-						let showWidgets = document.getElementById("widget_list");
-						let widgetID = document.getElementById("widget_id").value;
-						widgetID = parseInt(widgetID);
-						let number = 1;
-		
-
-						if( isNaN(widgetID) === false){
-
-							newWidgets = '';
-							
-							if(widgetID == 1){
-
-
+					function getSavedMeta(){
+						
+								if(widgetID == 1){
 									<?php
 									$name_widget1 = get_post_meta($post->ID, 'name_widget1', true); 
-									$amt_widget1 = get_post_meta($post->ID, 'amt_widget1', true);
-									
+									$amt_widget1 = get_post_meta($post->ID, 'amt_widget1', true);			
 									$animation1 = get_post_meta($post->ID, 'animation1', true);
-									$image_url1 = get_post_meta($post->ID, 'image_url1', true); 					
+									$image_url1 = get_post_meta($post->ID, 'image_url1', true); 			
 									$image_id1 = get_post_meta($post->ID, 'image_id1', true);
-
 									?>
 
-
-
-								} else if(widgetID == 2){
-
+									} else if(widgetID == 2){
 
 									<?php 
 									$name_widget1 = get_post_meta($post->ID, 'name_widget1', true); 
 									$name_widget2 = get_post_meta($post->ID, 'name_widget2', true);
-									
 									$amt_widget1 = get_post_meta($post->ID, 'amt_widget1', true);
 									$amt_widget2 = get_post_meta($post->ID, 'amt_widget2', true);
-
 									$animation1 = get_post_meta($post->ID, 'animation1', true); 
 									$animation2 = get_post_meta($post->ID, 'animation2', true); 
-
 									$image_url1 = get_post_meta($post->ID, 'image_url1', true); 
-									$image_url2 = get_post_meta($post->ID, 'image_url2', true); 
-								
-
+									$image_url2 = get_post_meta($post->ID, 'image_url2', true);				
 									$image_id1 = get_post_meta($post->ID, 'image_id1', true); 
-									$image_id2 = get_post_meta($post->ID, 'image_id2', true);
-									
+									$image_id2 = get_post_meta($post->ID, 'image_id2', true);	
 
-							
 									?>
-								} else if(widgetID == 3){
+									} else if(widgetID == 3){
 									<?php 
 									$name_widget1 = get_post_meta($post->ID, 'name_widget1', true);
 									$name_widget2 = get_post_meta($post->ID, 'name_widget2', true);
 									$name_widget3 = get_post_meta($post->ID, 'name_widget3', true);
-
 									$amt_widget1 = get_post_meta($post->ID, 'amt_widget1', true);
 									$amt_widget2 = get_post_meta($post->ID, 'amt_widget2', true);
-									$amt_widget3 = get_post_meta($post->ID, 'amt_widget3', true);
-									
+									$amt_widget3 = get_post_meta($post->ID, 'amt_widget3', true);			
 									$animation1 = get_post_meta($post->ID, 'animation1', true); 
 									$animation2 = get_post_meta($post->ID, 'animation2', true); 
 									$animation3 = get_post_meta($post->ID, 'animation3', true); 
-
 									$image_url1 = get_post_meta($post->ID, 'image_url1', true); 
 									$image_url2 = get_post_meta($post->ID, 'image_url2', true); 
-									$image_url3 = get_post_meta($post->ID, 'image_url3', true); 							
-
+									$image_url3 = get_post_meta($post->ID, 'image_url3', true);				
 									$image_id1 = get_post_meta($post->ID, 'image_id1', true); 
 									$image_id2 = get_post_meta($post->ID, 'image_id2', true); 
 									$image_id3 = get_post_meta($post->ID, 'image_id3', true);
 
-
-								
 									?>
-								} else {
+									} else {
 									<?php 
 									$name_widget1 = get_post_meta($post->ID, 'name_widget1', true); 
 									$name_widget2 = get_post_meta($post->ID, 'name_widget2', true); 
 									$name_widget3 = get_post_meta($post->ID, 'name_widget3', true); 
 									$name_widget4 = get_post_meta($post->ID, 'name_widget4', true); 
-
 									$amt_widget1 = get_post_meta($post->ID, 'amt_widget1', true);
 									$amt_widget2 = get_post_meta($post->ID, 'amt_widget2', true);
 									$amt_widget3 = get_post_meta($post->ID, 'amt_widget3', true);
 									$amt_widget4 = get_post_meta($post->ID, 'amt_widget4', true);
-
 									$animation1 = get_post_meta($post->ID, 'animation1', true); 
 									$animation2 = get_post_meta($post->ID, 'animation2', true); 
 									$animation3 = get_post_meta($post->ID, 'animation3', true); 
 									$animation4 = get_post_meta($post->ID, 'animation4', true); 
-
 									$image_url1 = get_post_meta($post->ID, 'image_url1', true); 
 									$image_url2 = get_post_meta($post->ID, 'image_url2', true); 
 									$image_url3 = get_post_meta($post->ID, 'image_url3', true); 
 									$image_url4 = get_post_meta($post->ID, 'image_url4', true); 
-
 									$image_id1 = get_post_meta($post->ID, 'image_id1', true); 
 									$image_id2 = get_post_meta($post->ID, 'image_id2', true); 
 									$image_id3 = get_post_meta($post->ID, 'image_id3', true); 
 									$image_id4 = get_post_meta($post->ID, 'image_id4', true);
-
-
-
 									?>
-							
-							}
+
+								}
+					}
+
+				
+					function changeWidgets(){
+
+						let showWidgets = document.getElementById("widget_list");
+						let widgetID = document.getElementById("widget_id").value;
+						widgetID = parseInt(widgetID);
+
+						if( isNaN(widgetID) === false){
+
+							newWidgets = '';
+
+							let number = 1;
 
 							for (number;number<widgetID+1;number++) { 		
 									
-							if(number == 1){
-								newWidgets = '<ul><li><label>Name:</label><input name="name_widget'+number+'" value="<?php echo isset($name_widget1) ? $name_widget1 : ''; ?>" type="text" /><br></li><li><label>Amount:</label><div id="tickerNum'+number+'" class="tickerNum"><?php echo $savings_number; ?></div><span> x </span><input name="amt_widget'+number+'" id="amt_widget'+number+'" class="amt_widget" value="<?php echo isset($amt_widget1) ? $amt_widget1 : ''; ?>" type="number" step="any" /><span> = </span><div id="totalAmt'+number+'" class="totalAmt" name="totalAmt'+number+'"><?php echo isset($totalamt1) ? $totalamt1 : ''; ?></div></li><li><label>Image:</label><br><br><textarea class="widefat" id="animation'+number+'" name="animation'+number+'" ><?php echo isset($animation1) ? $animation1 : ''; ?></textarea></li><li class="animation_image"><label>Image:</label><input type="text" name="image_url'+number+'" class="image_url'+number+'" value="<?php echo isset($image_url1) ? $image_url1 : ''; ?>" /><input type="text" name="image_id'+number+'" class="image_id'+number+'" value="<?php echo isset($image_id1) ? $image_id1 : ''; ?>" /><input class="my_clear_button'+number+'" type="button" value="Clear" /><input class="my_upl_button'+number+'" type="button" value="Upload File" /></li></ul>';
-							} else if(number == 2){
-								newWidgets += '<ul><li><label>Name:</label><input name="name_widget'+number+'" value="<?php echo isset($name_widget2) ? $name_widget2 : ''; ?>" type="text" /><br></li><li><label>Amount:</label><div id="tickerNum'+number+'" class="tickerNum"><?php echo $savings_number; ?></div><span> x </span><input name="amt_widget'+number+'" id="amt_widget'+number+'" class="amt_widget" value="<?php echo isset($amt_widget2) ? $amt_widget2 : ''; ?>" type="number" step="any" /><span> = </span><div id="totalAmt'+number+'" class="totalAmt" name="totalAmt'+number+'"><?php echo isset($totalamt2) ? $totalamt2 : ''; ?></div></li><li><label>Image:</label><br><br><textarea class="widefat" id="animation'+number+'" name="animation'+number+'" ><?php echo isset($animation2) ? $animation2 : ''; ?></textarea></li><li class="animation_image"><label>Image:</label><input type="text" name="image_url'+number+'" class="image_url'+number+'" value="<?php echo isset($image_url2) ? $image_url2 : ''; ?>" /><input type="text" name="image_id'+number+'" class="image_id'+number+'" value="<?php echo isset($image_id2) ? $image_id2 : ''; ?>" /><input class="my_clear_button'+number+'" type="button" value="Clear" /><input class="my_upl_button'+number+'" type="button" value="Upload File" /></li></ul>';
-							} else if(number == 3){
-								newWidgets += '<ul><li><label>Name:</label><input name="name_widget'+number+'" value="<?php echo isset($name_widget3) ? $name_widget3 : ''; ?>" type="text" /><br></li><li><label>Amount:</label><div id="tickerNum'+number+'" class="tickerNum"><?php echo $savings_number; ?></div><span> x </span><input name="amt_widget'+number+'" id="amt_widget'+number+'" class="amt_widget" value="<?php echo isset($amt_widget3) ? $amt_widget3 : ''; ?>" type="number" step="any" /><span> = </span><div id="totalAmt'+number+'" class="totalAmt" name="totalAmt'+number+'"><?php echo isset($totalamt3) ? $totalamt3 : ''; ?></div></li><li><label>Image:</label><br><br><textarea class="widefat" id="animation'+number+'" name="animation'+number+'" ><?php echo isset($animation3) ? $animation3 : ''; ?></textarea></li><li class="animation_image"><label>Image:</label><input type="text" name="image_url'+number+'" class="image_url'+number+'" value="<?php echo isset($image_url3) ? $image_url3 : ''; ?>" /><input type="text" name="image_id'+number+'" class="image_id'+number+'" value="<?php echo isset($image_id3) ? $image_id3 : ''; ?>" /><input class="my_clear_button'+number+'" type="button" value="Clear" /><input class="my_upl_button'+number+'" type="button" value="Upload File" /></li></ul>';
-							} else {
-								newWidgets += '<ul><li><label>Name:</label><input name="name_widget'+number+'" value="<?php echo isset($name_widget4) ? $name_widget4 : ''; ?>" type="text" /><br></li><li><label>Amount:</label><div id="tickerNum'+number+'" class="tickerNum"><?php echo $savings_number; ?></div><span> x </span><input name="amt_widget'+number+'" id="amt_widget'+number+'" class="amt_widget" value="<?php echo isset($amt_widget4) ? $amt_widget4 : ''; ?>" type="number" step="any" /><span> = </span><div id="totalAmt'+number+'" class="totalAmt" name="totalAmt'+number+'"><?php echo isset($totalamt4) ? $totalamt4 : ''; ?></div></li><li><label>Image:</label><br><br><textarea class="widefat" id="animation'+number+'" name="animation'+number+'" ><?php echo isset($animation4) ? $animation4 : ''; ?></textarea></li><li class="animation_image"><label>Image:</label><input type="text" name="image_url'+number+'" class="image_url'+number+'" value="<?php echo isset($image_url4) ? $image_url4 : ''; ?>" /><input type="text" name="image_id'+number+'" class="image_id'+number+'" value="<?php echo isset($image_id4) ? $image_id4 : ''; ?>" /><input class="my_clear_button'+number+'" type="button" value="Clear" /><input class="my_upl_button'+number+'" type="button" value="Upload File" /></li></ul>';
-							}
+								if(number == 1){
+									newWidgets = '<ul><li><label>Name:</label><input name="name_widget'+number+'" value="<?php echo isset($name_widget1) ? $name_widget1 : ''; ?>" type="text" /><br></li><li><label>Amount:</label><div id="tickerNum'+number+'" class="tickerNum"><?php echo $savings_number; ?></div><span> x </span><input name="amt_widget'+number+'" id="amt_widget'+number+'" class="amt_widget" value="<?php echo isset($amt_widget1) ?  sprintf($amt_widget1) : ''; ?>" type="number" step="any" /><span> = </span><div id="totalAmt'+number+'" class="totalAmt" name="totalAmt'+number+'"><?php echo isset($totalamt1) ?  number_format($totalamt1) : ''; ?></div></li><li><label>Image:</label><br><br><textarea class="widefat" id="animation'+number+'" name="animation'+number+'" ><?php echo isset($animation1) ? $animation1 : ''; ?></textarea></li><li class="animation_image"><label>Image:</label><input type="text" name="image_url'+number+'" class="image_url'+number+'" value="<?php echo isset($image_url1) ? $image_url1 : ''; ?>" /><input type="text" name="image_id'+number+'" class="image_id'+number+'" value="<?php echo isset($image_id1) ? $image_id1 : ''; ?>" /><input class="my_clear_button'+number+'" type="button" value="Clear" /><input class="my_upl_button'+number+'" type="button" value="Upload File" /></li></ul>';
+								} else if(number == 2){
+									newWidgets += '<ul><li><label>Name:</label><input name="name_widget'+number+'" value="<?php echo isset($name_widget2) ? $name_widget2 : ''; ?>" type="text" /><br></li><li><label>Amount:</label><div id="tickerNum'+number+'" class="tickerNum"><?php echo $savings_number; ?></div><span> x </span><input name="amt_widget'+number+'" id="amt_widget'+number+'" class="amt_widget" value="<?php echo isset($amt_widget2) ?  sprintf($amt_widget2) : ''; ?>" type="number" step="any" /><span> = </span><div id="totalAmt'+number+'" class="totalAmt" name="totalAmt'+number+'"><?php echo isset($totalamt2) ?  number_format($totalamt2) : ''; ?></div></li><li><label>Image:</label><br><br><textarea class="widefat" id="animation'+number+'" name="animation'+number+'" ><?php echo isset($animation2) ? $animation2 : ''; ?></textarea></li><li class="animation_image"><label>Image:</label><input type="text" name="image_url'+number+'" class="image_url'+number+'" value="<?php echo isset($image_url2) ? $image_url2 : ''; ?>" /><input type="text" name="image_id'+number+'" class="image_id'+number+'" value="<?php echo isset($image_id2) ? $image_id2 : ''; ?>" /><input class="my_clear_button'+number+'" type="button" value="Clear" /><input class="my_upl_button'+number+'" type="button" value="Upload File" /></li></ul>';
+								} else if(number == 3){
+									newWidgets += '<ul><li><label>Name:</label><input name="name_widget'+number+'" value="<?php echo isset($name_widget3) ? $name_widget3 : ''; ?>" type="text" /><br></li><li><label>Amount:</label><div id="tickerNum'+number+'" class="tickerNum"><?php echo $savings_number; ?></div><span> x </span><input name="amt_widget'+number+'" id="amt_widget'+number+'" class="amt_widget" value="<?php echo isset($amt_widget3) ?  sprintf('%.9F',$amt_widget3) : ''; ?>" type="number" step="any" /><span> = </span><div id="totalAmt'+number+'" class="totalAmt" name="totalAmt'+number+'"><?php echo isset($totalamt3) ?  number_format($totalamt3) : ''; ?></div></li><li><label>Image:</label><br><br><textarea class="widefat" id="animation'+number+'" name="animation'+number+'" ><?php echo isset($animation3) ? $animation3 : ''; ?></textarea></li><li class="animation_image"><label>Image:</label><input type="text" name="image_url'+number+'" class="image_url'+number+'" value="<?php echo isset($image_url3) ? $image_url3 : ''; ?>" /><input type="text" name="image_id'+number+'" class="image_id'+number+'" value="<?php echo isset($image_id3) ? $image_id3 : ''; ?>" /><input class="my_clear_button'+number+'" type="button" value="Clear" /><input class="my_upl_button'+number+'" type="button" value="Upload File" /></li></ul>';
+								} else {
+									newWidgets += '<ul><li><label>Name:</label><input name="name_widget'+number+'" value="<?php echo isset($name_widget4) ? $name_widget4 : ''; ?>" type="text" /><br></li><li><label>Amount:</label><div id="tickerNum'+number+'" class="tickerNum"><?php echo $savings_number; ?></div><span> x </span><input name="amt_widget'+number+'" id="amt_widget'+number+'" class="amt_widget" value="<?php echo isset($amt_widget4) ?  sprintf($amt_widget4) : ''; ?>" type="number" step="any" /><span> = </span><div id="totalAmt'+number+'" class="totalAmt" name="totalAmt'+number+'"><?php echo isset($totalamt4) ?  number_format($totalamt4) : ''; ?></div></li><li><label>Image:</label><br><br><textarea class="widefat" id="animation'+number+'" name="animation'+number+'" ><?php echo isset($animation4) ? $animation4 : ''; ?></textarea></li><li class="animation_image"><label>Image:</label><input type="text" name="image_url'+number+'" class="image_url'+number+'" value="<?php echo isset($image_url4) ? $image_url4 : ''; ?>" /><input type="text" name="image_id'+number+'" class="image_id'+number+'" value="<?php echo isset($image_id4) ? $image_id4 : ''; ?>" /><input class="my_clear_button'+number+'" type="button" value="Clear" /><input class="my_upl_button'+number+'" type="button" value="Upload File" /></li></ul>';
+								}
 
 							}
 
@@ -265,161 +244,66 @@ function pg_counter_settings(){
 						}
 
 						showWidgets.innerHTML = newWidgets;
-			
-
+		
 					}
-
-					let number = 1;
-					
-					<?php													
-
+									
+					<?php
 					$widget_id_int = (int) $widget_id;
-					$amt_widget1 = floatval($amt_widget1);
-					$amt_widget2 = floatval($amt_widget2);
-					$amt_widget3 = floatval($amt_widget3);			
-					$amt_widget4 = floatval($amt_widget4);
+					$amt_widget1 = (float)$amt_widget1;
+					$amt_widget2 =  (float)$amt_widget2;
+					$amt_widget3 =  (float)$amt_widget3;			
+					$amt_widget4 =  (float)$amt_widget4;
 
 					if($widget_id_int < 2){
-						$totalamt1 = $savings_number * $amt_widget1;
+						$totalamt1 = round($savings_number * $amt_widget1);
 
 					} else if($widget_id_int < 3){
-						$totalamt1 = $savings_number * $amt_widget1;
-						$totalamt2 = $savings_number * $amt_widget2;
+						$totalamt1 = round($savings_number * $amt_widget1);
+						$totalamt2 = round($savings_number * $amt_widget2);
 					} else if($widget_id_int < 4){
-						$totalamt1 = $savings_number * $amt_widget1;
-						$totalamt2 = $savings_number * $amt_widget2;
-						$totalamt3 = $savings_number * $amt_widget3;
+						$totalamt1 = round($savings_number * $amt_widget1);
+						$totalamt2 = round($savings_number * $amt_widget2);
+						$totalamt3 = round($savings_number * $amt_widget3);
 					} else {
-						$totalamt1 = $savings_number * $amt_widget1;
-						$totalamt2 = $savings_number * $amt_widget2;
-						$totalamt3 = $savings_number * $amt_widget3;
-						$totalamt4 = $savings_number * $amt_widget4;
+						$totalamt1 = round($savings_number * $amt_widget1);
+						$totalamt2 = round($savings_number * $amt_widget2);
+						$totalamt3 = round($savings_number * $amt_widget3);
+						$totalamt4 = round($savings_number * $amt_widget4);
 					}
 					?>
 	
-					console.log('widgetID: '+widgetID);
-					console.log('number: '+number);
+				if( isNaN(widgetID) === false){ 
 
-					if( isNaN(widgetID) === false){ 
+					widgets = '';
 
-						widgets = '';
+					getSavedMeta();
 
-						if(widgetID == 1){
-									
-									<?php
-									 $name_widget1 = get_post_meta($post->ID, 'name_widget1', true); 
-									 $amt_widget1 = get_post_meta($post->ID, 'amt_widget1', true);
-									 
-									 $animation1 = get_post_meta($post->ID, 'animation1', true);
-									 $image_url1 = get_post_meta($post->ID, 'image_url1', true); 					
-									 $image_id1 = get_post_meta($post->ID, 'image_id1', true);							
-									?>	
-									
-		
-								} else if(widgetID == 2){
-									<?php 
-									 $name_widget1 = get_post_meta($post->ID, 'name_widget1', true); 
-									 $name_widget2 = get_post_meta($post->ID, 'name_widget2', true);
-									 
-									 $amt_widget1 = get_post_meta($post->ID, 'amt_widget1', true);
+					let number = 1;
 
-									 $amt_widget2 = get_post_meta($post->ID, 'amt_widget2', true);
-
-									 $animation1 = get_post_meta($post->ID, 'animation1', true); 
-									 $animation2 = get_post_meta($post->ID, 'animation2', true); 
-
-									 $image_url1 = get_post_meta($post->ID, 'image_url1', true); 
-									 $image_url2 = get_post_meta($post->ID, 'image_url2', true); 
-								
-
-									 $image_id1 = get_post_meta($post->ID, 'image_id1', true); 
-									 $image_id2 = get_post_meta($post->ID, 'image_id2', true);			 
-
-							
-									 ?>
-								} else if(widgetID == 3){
-									<?php 
-									$name_widget1 = get_post_meta($post->ID, 'name_widget1', true);
-									$name_widget2 = get_post_meta($post->ID, 'name_widget2', true);
-									$name_widget3 = get_post_meta($post->ID, 'name_widget3', true);
-
-									$amt_widget1 = get_post_meta($post->ID, 'amt_widget1', true);
-									$amt_widget2 = get_post_meta($post->ID, 'amt_widget2', true);
-									$amt_widget3 = get_post_meta($post->ID, 'amt_widget3', true);
-									
-									$animation1 = get_post_meta($post->ID, 'animation1', true); 
-									$animation2 = get_post_meta($post->ID, 'animation2', true); 
-									$animation3 = get_post_meta($post->ID, 'animation3', true); 
-
-									$image_url1 = get_post_meta($post->ID, 'image_url1', true); 
-									$image_url2 = get_post_meta($post->ID, 'image_url2', true); 
-									$image_url3 = get_post_meta($post->ID, 'image_url3', true); 							
-
-									$image_id1 = get_post_meta($post->ID, 'image_id1', true); 
-									$image_id2 = get_post_meta($post->ID, 'image_id2', true); 
-									$image_id3 = get_post_meta($post->ID, 'image_id3', true);
-								
-									 ?>
-								} else {
-									<?php 
-									$name_widget1 = get_post_meta($post->ID, 'name_widget1', true); 
-									 $name_widget2 = get_post_meta($post->ID, 'name_widget2', true); 
-									 $name_widget3 = get_post_meta($post->ID, 'name_widget3', true); 
-									 $name_widget4 = get_post_meta($post->ID, 'name_widget4', true); 
-
-									 $amt_widget1 = get_post_meta($post->ID, 'amt_widget1', true);
-									 $amt_widget2 = get_post_meta($post->ID, 'amt_widget2', true);
-									 $amt_widget3 = get_post_meta($post->ID, 'amt_widget3', true);
-									 $amt_widget4 = get_post_meta($post->ID, 'amt_widget4', true);
-
-									 $animation1 = get_post_meta($post->ID, 'animation1', true); 
-									 $animation2 = get_post_meta($post->ID, 'animation2', true); 
-									 $animation3 = get_post_meta($post->ID, 'animation3', true); 
-									 $animation4 = get_post_meta($post->ID, 'animation4', true); 
-
-									 $image_url1 = get_post_meta($post->ID, 'image_url1', true); 
-									 $image_url2 = get_post_meta($post->ID, 'image_url2', true); 
-									 $image_url3 = get_post_meta($post->ID, 'image_url3', true); 
-									 $image_url4 = get_post_meta($post->ID, 'image_url4', true); 
-
-									 $image_id1 = get_post_meta($post->ID, 'image_id1', true); 
-									 $image_id2 = get_post_meta($post->ID, 'image_id2', true); 
-									 $image_id3 = get_post_meta($post->ID, 'image_id3', true); 
-									 $image_id4 = get_post_meta($post->ID, 'image_id4', true);
-
-
-
-									?>
-							
-							}
-												
-						for (number;number<widgetID+1;number++) { 
+					for (number;number<widgetID+1;number++) { 
 										
 							if(number == 1){
-								widgets = '<ul><li><label>Name:</label><input name="name_widget'+number+'" value="<?php echo isset($name_widget1) ? $name_widget1 : ''; ?>" type="text" /><br></li><li><label>Amount:</label><div id="tickerNum'+number+'" class="tickerNum"><?php echo isset($savings_number) ? $savings_number : ''; ?></div><span> x </span><input name="amt_widget'+number+'" id="amt_widget'+number+'" class="amt_widget" value="<?php echo isset($amt_widget1) ? $amt_widget1 : ''; ?>" type="number" step="any" /><span> = </span><div id="totalAmt'+number+'" class="totalAmt" name="totalAmt'+number+'"><?php echo isset($totalamt1) ? $totalamt1 : ''; ?></div></li><li><label>Image:</label><br><br><textarea class="widefat" id="animation'+number+'" name="animation'+number+'" ><?php echo isset($animation1) ? $animation1 : ''; ?></textarea></li><li class="animation_image"><label>Image:</label><input type="text" name="image_url'+number+'" class="image_url'+number+'" value="<?php echo isset($image_url1) ? $image_url1 : ''; ?>" /><input type="text" name="image_id'+number+'" class="image_id'+number+'" value="<?php echo isset($image_id1) ? $image_id1 : ''; ?>" /><input class="my_clear_button'+number+'" type="button" value="Clear" /><input class="my_upl_button'+number+'" type="button" value="Upload File" /></li></ul>';
+								widgets = '<ul><li><label>Name:</label><input name="name_widget'+number+'" value="<?php echo isset($name_widget1) ? $name_widget1 : ''; ?>" type="text" /><br></li><li><label>Amount:</label><div id="tickerNum'+number+'" class="tickerNum"><?php echo isset($savings_number) ? $savings_number : ''; ?></div><span> x </span><input name="amt_widget'+number+'" id="amt_widget'+number+'" class="amt_widget" value="<?php echo isset($amt_widget1) ? sprintf($amt_widget1) : ''; ?>" type="number" step="any" /><span> = </span><div id="totalAmt'+number+'" class="totalAmt" name="totalAmt'+number+'"><?php echo isset($totalamt1) ? number_format($totalamt1) : ''; ?></div></li><li><label>Image:</label><br><br><textarea class="widefat" id="animation'+number+'" name="animation'+number+'" ><?php echo isset($animation1) ? $animation1 : ''; ?></textarea></li><li class="animation_image"><label>Image:</label><input type="text" name="image_url'+number+'" class="image_url'+number+'" value="<?php echo isset($image_url1) ? $image_url1 : ''; ?>" /><input type="text" name="image_id'+number+'" class="image_id'+number+'" value="<?php echo isset($image_id1) ? $image_id1 : ''; ?>" /><input class="my_clear_button'+number+'" type="button" value="Clear" /><input class="my_upl_button'+number+'" type="button" value="Upload File" /></li></ul>';
 							} else if(number == 2){
-								widgets += '<ul><li><label>Name:</label><input name="name_widget'+number+'" value="<?php echo isset($name_widget2) ? $name_widget2 : ''; ?>" type="text" /><br></li><li><label>Amount:</label><div id="tickerNum'+number+'" class="tickerNum"><?php echo isset($savings_number) ? $savings_number : ''; ?></div><span> x </span><input name="amt_widget'+number+'" id="amt_widget'+number+'" class="amt_widget" value="<?php echo isset($amt_widget2) ? $amt_widget2 : ''; ?>" type="number" step="any" /><span> = </span><div id="totalAmt'+number+'" class="totalAmt" name="totalAmt'+number+'"><?php echo isset($totalamt2) ? $totalamt2 : ''; ?></div></li><li><label>Image:</label><br><br><textarea class="widefat" id="animation'+number+'" name="animation'+number+'" ><?php echo isset($animation2) ? $animation2 : ''; ?></textarea></li><li class="animation_image"><label>Image:</label><input type="text" name="image_url'+number+'" class="image_url'+number+'" value="<?php echo isset($image_url2) ? $image_url2 : ''; ?>" /><input type="text" name="image_id'+number+'" class="image_id'+number+'" value="<?php echo isset($image_id2) ? $image_id2 : ''; ?>" /><input class="my_clear_button'+number+'" type="button" value="Clear" /><input class="my_upl_button'+number+'" type="button" value="Upload File" /></li></ul>';
+								widgets += '<ul><li><label>Name:</label><input name="name_widget'+number+'" value="<?php echo isset($name_widget2) ? $name_widget2 : ''; ?>" type="text" /><br></li><li><label>Amount:</label><div id="tickerNum'+number+'" class="tickerNum"><?php echo isset($savings_number) ? $savings_number : ''; ?></div><span> x </span><input name="amt_widget'+number+'" id="amt_widget'+number+'" class="amt_widget" value="<?php echo isset($amt_widget2) ?  sprintf($amt_widget2) : ''; ?>" type="number" step="any" /><span> = </span><div id="totalAmt'+number+'" class="totalAmt" name="totalAmt'+number+'"><?php echo isset($totalamt2) ?  number_format($totalamt2) : ''; ?></div></li><li><label>Image:</label><br><br><textarea class="widefat" id="animation'+number+'" name="animation'+number+'" ><?php echo isset($animation2) ? $animation2 : ''; ?></textarea></li><li class="animation_image"><label>Image:</label><input type="text" name="image_url'+number+'" class="image_url'+number+'" value="<?php echo isset($image_url2) ? $image_url2 : ''; ?>" /><input type="text" name="image_id'+number+'" class="image_id'+number+'" value="<?php echo isset($image_id2) ? $image_id2 : ''; ?>" /><input class="my_clear_button'+number+'" type="button" value="Clear" /><input class="my_upl_button'+number+'" type="button" value="Upload File" /></li></ul>';
 							} else if(number == 3){
-								widgets += '<ul><li><label>Name:</label><input name="name_widget'+number+'" value="<?php echo isset($name_widget3) ? $name_widget3 : ''; ?>" type="text" /><br></li><li><label>Amount:</label><div id="tickerNum'+number+'" class="tickerNum"><?php echo isset($savings_number) ? $savings_number : ''; ?></div><span> x </span><input name="amt_widget'+number+'" id="amt_widget'+number+'" class="amt_widget" value="<?php echo isset($amt_widget3) ? $amt_widget3 : ''; ?>" type="number" step="any" /><span> = </span><div id="totalAmt'+number+'" class="totalAmt" name="totalAmt'+number+'"><?php echo isset($totalamt3) ? $totalamt3 : ''; ?></div></li><li><label>Image:</label><br><br><textarea class="widefat" id="animation'+number+'" name="animation'+number+'" ><?php echo isset($animation3) ? $animation3 : ''; ?></textarea></li><li class="animation_image"><label>Image:</label><input type="text" name="image_url'+number+'" class="image_url'+number+'" value="<?php echo isset($image_url3) ? $image_url3 : ''; ?>" /><input type="text" name="image_id'+number+'" class="image_id'+number+'" value="<?php echo isset($image_id3) ? $image_id3 : ''; ?>" /><input class="my_clear_button'+number+'" type="button" value="Clear" /><input class="my_upl_button'+number+'" type="button" value="Upload File" /></li></ul>';
+								widgets += '<ul><li><label>Name:</label><input name="name_widget'+number+'" value="<?php echo isset($name_widget3) ? $name_widget3 : ''; ?>" type="text" /><br></li><li><label>Amount:</label><div id="tickerNum'+number+'" class="tickerNum"><?php echo isset($savings_number) ? $savings_number : ''; ?></div><span> x </span><input name="amt_widget'+number+'" id="amt_widget'+number+'" class="amt_widget" value="<?php echo isset($amt_widget3) ?  sprintf('%.9F',$amt_widget3) : ''; ?>" type="number" step="any" /><span> = </span><div id="totalAmt'+number+'" class="totalAmt" name="totalAmt'+number+'"><?php echo isset($totalamt3) ?  number_format($totalamt3) : ''; ?></div></li><li><label>Image:</label><br><br><textarea class="widefat" id="animation'+number+'" name="animation'+number+'" ><?php echo isset($animation3) ? $animation3 : ''; ?></textarea></li><li class="animation_image"><label>Image:</label><input type="text" name="image_url'+number+'" class="image_url'+number+'" value="<?php echo isset($image_url3) ? $image_url3 : ''; ?>" /><input type="text" name="image_id'+number+'" class="image_id'+number+'" value="<?php echo isset($image_id3) ? $image_id3 : ''; ?>" /><input class="my_clear_button'+number+'" type="button" value="Clear" /><input class="my_upl_button'+number+'" type="button" value="Upload File" /></li></ul>';
 							} else {
-								widgets += '<ul><li><label>Name:</label><input name="name_widget'+number+'" value="<?php echo isset($name_widget4) ? $name_widget4 : ''; ?>" type="text" /><br></li><li><label>Amount:</label><div id="tickerNum'+number+'" class="tickerNum"><?php echo isset($savings_number) ? $savings_number : ''; ?></div><span> x </span><input name="amt_widget'+number+'" id="amt_widget'+number+'" class="amt_widget" value="<?php echo isset($amt_widget4) ? $amt_widget4 : ''; ?>" type="number" step="any" /><span> = </span><div id="totalAmt'+number+'" class="totalAmt" name="totalAmt'+number+'"><?php echo isset($totalamt4) ? $totalamt4 : ''; ?></div></li><li><label>Image:</label><br><br><textarea class="widefat" id="animation'+number+'" name="animation'+number+'" ><?php echo isset($animation4) ? $animation4 : ''; ?></textarea></li><li class="animation_image"><label>Image:</label><input type="text" name="image_url'+number+'" class="image_url'+number+'" value="<?php echo isset($image_url4) ? $image_url4 : ''; ?>" /><input type="text" name="image_id'+number+'" class="image_id'+number+'" value="<?php echo isset($image_id4) ? $image_id4 : ''; ?>" /><input class="my_clear_button'+number+'" type="button" value="Clear" /><input class="my_upl_button'+number+'" type="button" value="Upload File" /></li></ul>';
+								widgets += '<ul><li><label>Name:</label><input name="name_widget'+number+'" value="<?php echo isset($name_widget4) ? $name_widget4 : ''; ?>" type="text" /><br></li><li><label>Amount:</label><div id="tickerNum'+number+'" class="tickerNum"><?php echo isset($savings_number) ? $savings_number : ''; ?></div><span> x </span><input name="amt_widget'+number+'" id="amt_widget'+number+'" class="amt_widget" value="<?php echo isset($amt_widget4) ? sprintf($amt_widget4) : ''; ?>" type="number" step="any" /><span> = </span><div id="totalAmt'+number+'" class="totalAmt" name="totalAmt'+number+'"><?php echo isset($totalamt4) ?  number_format($totalamt4) : ''; ?></div></li><li><label>Image:</label><br><br><textarea class="widefat" id="animation'+number+'" name="animation'+number+'" ><?php echo isset($animation4) ? $animation4 : ''; ?></textarea></li><li class="animation_image"><label>Image:</label><input type="text" name="image_url'+number+'" class="image_url'+number+'" value="<?php echo isset($image_url4) ? $image_url4 : ''; ?>" /><input type="text" name="image_id'+number+'" class="image_id'+number+'" value="<?php echo isset($image_id4) ? $image_id4 : ''; ?>" /><input class="my_clear_button'+number+'" type="button" value="Clear" /><input class="my_upl_button'+number+'" type="button" value="Upload File" /></li></ul>';
 							}
 
-						}
+					}
 
-					} else {
+				} else {
 
-						widgets = '<ul><li>Select the number of widgets from the dropdown</li></ul>';
+					widgets = '<ul><li>Select the number of widgets from the dropdown</li></ul>';
 
-					}	
+				}	
 					
 					showWidgets.innerHTML = widgets;			
 			
 			</script>
 					
-				<?php 	var_dump($differenceSeconds); 
-						var_dump($now_date); ?>
-
 </div>
 <?php
 
@@ -437,7 +321,7 @@ function pg_counter_save($post_id){
 
 		if( isset($_POST['starting_number']) ){
 			update_post_meta($post_id, "starting_number", $_POST["starting_number"]);
-		}	
+		}
 		
 		if( isset($_POST['starting_date']) ){
 			update_post_meta($post_id, "starting_date", $_POST["starting_date"]);
@@ -447,13 +331,11 @@ function pg_counter_save($post_id){
 		}	
 		if( isset($_POST['increment_number']) ){
 			update_post_meta($post_id, "increment_number", $_POST["increment_number"]);
-		}
-	
+		}	
 		if( isset($_POST['counters_description']) ){
 			$data=htmlspecialchars($_POST['counters_description']);
 			update_post_meta($post_id, 'counters_description',$data);
 		}
-
 		if( isset($_POST['widget_id']) ){
 			
 			update_post_meta($post_id, "widget_id", $_POST["widget_id"]);
@@ -494,7 +376,6 @@ function pg_counter_save($post_id){
 			if( isset($_POST['animation4']) ){
 				update_post_meta($post_id, "animation4", $_POST["animation4"]);
 			}
-
 			if( isset($_POST['image_url1']) ){
 				update_post_meta($post_id, "image_url1", $_POST["image_url1"]);
 			}
@@ -507,7 +388,6 @@ function pg_counter_save($post_id){
 			if( isset($_POST['image_url4']) ){
 				update_post_meta($post_id, "image_url4", $_POST["image_url4"]);
 			}
-
 			if( isset($_POST['image_id1']) ){
 				update_post_meta($post_id, "image_id1", $_POST["image_id1"]);
 			}
@@ -519,10 +399,7 @@ function pg_counter_save($post_id){
 			}
 			if( isset($_POST['image_id4']) ){
 				update_post_meta($post_id, "image_id4", $_POST["image_id4"]);
-			}
-
-
-			
+			}			
 
 		}
 
@@ -530,7 +407,6 @@ function pg_counter_save($post_id){
 
 }
 add_action('save_post', 'pg_counter_save');
-
 
 
 //shortcodes

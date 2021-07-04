@@ -18,7 +18,7 @@ function pg_counter_widgets_display($atts = []){
 						'posts_per_page' => -1,
 						'orderby' => 'title',
 						'order' => 'ASC',
-						'post_status' => 'pubdivsh',
+						'post_status' => 'publish',
 			);
 			$counters = get_posts($widget_args);
 
@@ -28,7 +28,7 @@ function pg_counter_widgets_display($atts = []){
                         
                     $atts = shortcode_atts( array(
                         'title' => $counter->post_title,
-                        'divmit' => 1,
+                        'limit' => 1,
                     ), $atts );
                         
                     setup_postdata($counter);
@@ -45,22 +45,20 @@ function pg_counter_widgets_display($atts = []){
 
            ?>                 
                          
-           <div class="counter">
+           <div class="counter" id="counter_widgets">
     
                             <div class="counter_title">
-                                <?php echo $counter->post_title; ?> 
+                                <h2><?php echo sprintf($counter->post_title); ?></h2>
                             </div> 
                             <div class="counter_description">
-                                <?php echo sprintf($counters_description); ?> 
+                               <p> <?php echo sprintf($counters_description); ?> </p>
                             </div>                            
                        
-                        <div class="counter_w_grid adivgncenter">
+                        <div class="counter_w_grid aligncenter">
                         
                         <div class="grid_container">
-
+               
                 <?php
-
-
 
                    
 					$start_date = strtotime($starting_date);
@@ -69,45 +67,54 @@ function pg_counter_widgets_display($atts = []){
 					$increment_number = floatVal($increment_number);	
 					$differenceSeconds = $now_date - $start_date;				
 					$savings_number = ( ($differenceSeconds * $increment_number) + $starting_number); 
+
                     
                     if( $widget_id == 1){
 
-                    ?>
-                    <script type="text/javascript">
+                    ?>   
+                     <script type="text/javascript">
 
                         
                     <?php
                             
-                             $name_widget1 = get_post_meta($counter->ID, 'name_widget1', true); 
-                             $amt_widget1 = get_post_meta($counter->ID, 'amt_widget1', true);
-                             $animation1 = get_post_meta($counter->ID, 'animation1', true);
-                             $image_url1 = get_post_meta($counter->ID, 'image_url1', true); 				
-                             $image_id1 = get_post_meta($counter->ID, 'image_id1', true); 
+                        $name_widget1 = get_post_meta($counter->ID, 'name_widget1', true); 
+                        $amt_widget1 = get_post_meta($counter->ID, 'amt_widget1', true);
+                        $animation1 = get_post_meta($counter->ID, 'animation1', true);
+                        $image_url1 = get_post_meta($counter->ID, 'image_url1', true); 				
+                        $image_id1 = get_post_meta($counter->ID, 'image_id1', true); 
 
-                             $amt_widget1 = floatval($amt_widget1);
-                             $totalamt1 = round($savings_number * $amt_widget1);
+                        $amt_widget1 = floatval($amt_widget1);
+                        $totalamt1 = round($savings_number * $amt_widget1); 
 	
 					?>
-                  
+
+                        
                     </script>
+
            
                         <div class="counter_widget">
-                            <div id="tickerNum1 hidden"></div>
                             <div class="counter_w_image">
                             <img src="<?php echo ($image_url1 !== '') ? $image_url1 : ''; ?>" 
                             alt="<?php echo $name_widget1 ?>" />
                             </div>
-                            <div id="totalAmt1">
+                            <div class="totalamt" id="totalAmt1">
                             <?php echo  $totalamt1; ?>
                             </div>
                             <div class="counter_w_title">
-                            <?php echo $name_widget1; ?>
+                            <h3> <?php echo $name_widget1; ?> </h3>
                             </div>
                          </div>
 
+                        
                         <?php
                      
                         } else if($widget_id == 2){
+
+                            ?>   
+                            <script type="text/javascript">
+
+                               
+                           <?php   
                           
                              $name_widget1 = get_post_meta($counter->ID, 'name_widget1', true); 
                              $name_widget2 = get_post_meta($counter->ID, 'name_widget2', true);                             
@@ -122,37 +129,38 @@ function pg_counter_widgets_display($atts = []){
 
                              $amt_widget1 = floatval($amt_widget1);
                              $totalamt1 = round($savings_number * $amt_widget1);
+                             
 
                              $amt_widget2 = floatval($amt_widget2);
                              $totalamt2 = round($savings_number * $amt_widget2);
 
 
-                        ?>
-                        <div class="counter_widget">
-                            <div class="tickerNum hidden"></div> 
+                             ?>
+                               
+                         </script>
+
+                        <div class="counter_widget"> 
                             <div class="counter_w_image">
                             <img src="<?php echo ($image_url1 !== '') ? $image_url1 : ''; ?>" 
                             alt="<?php echo $name_widget1 ?>" />
                             </div>
-                            <div id="totalAmt1">
-                            <?php echo  $totalamt1; ?>
+                            <div class="totalamt" id="totalAmt1">                                
+                            <?php echo $totalamt1; ?>
                             </div>
                             <div class="counter_w_title">
-                            <?php echo $name_widget1; ?>
+                            <h3>  <?php echo $name_widget1; ?> </h3>
                             </div>
                          </div>
                          <div class="counter_widget">
-                            <div class="tickerNum hidden"></div>
-                            <div class="amt_widget hidden"> <?php echo $amt_widget2; ?></div>   
                             <div class="counter_w_image">
                                 <img src="<?php echo ($image_url2 !== '') ? $image_url2 : ''; ?>" 
                             alt="<?php echo $name_widget2; ?>" />
                             </div>
-                            <div id="totalAmt2">
-                            <?php echo  $totalamt2; ?>
+                            <div class="totalamt" id="totalAmt2">
+                            <?php echo $totalamt2; ?>
                             </div>
                             <div class="counter_w_title">
-                                <?php echo $name_widget2; ?>
+                            <h3>   <?php echo $name_widget2; ?> </h3>
                             </div>
                         </div>
 
@@ -160,6 +168,11 @@ function pg_counter_widgets_display($atts = []){
 
     
                         } else if($widget_id == 3){
+
+                            ?>   
+                            <script type="text/javascript">
+                               
+                           <?php                               
                           
                             $name_widget1 = get_post_meta($counter->ID, 'name_widget1', true);
                             $name_widget2 = get_post_meta($counter->ID, 'name_widget2', true);
@@ -187,26 +200,24 @@ function pg_counter_widgets_display($atts = []){
                              $totalamt3 = round($savings_number * $amt_widget3);
  
 
-                            ?>
-                            
-   
-
+                             ?>
+                               
+                             </script>
+                    
                             <div class="counter_widget">
-                                <div class="tickerNum hidden"></div>
-                                
+                               
                                 <div class="counter_w_image">
                                 <img src="<?php echo ($image_url1 !== '') ? $image_url1 : ''; ?>" 
                                 alt="<?php echo $name_widget1 ?>" />
                                 </div>
-                                <div id="totalAmt1">
+                                <div class="totalamt" id="totalAmt1">
                                 <?php echo  $totalamt1; ?>
                                 </div>
                                 <div class="counter_w_title">
-                                <?php echo $name_widget1; ?>
+                                <h3><?php echo $name_widget1; ?></h3>
                                 </div>
                              </div>
-                             <div class="counter_widget">
-                                <div class="tickerNum hidden"></div>                                
+                             <div class="counter_widget">                         
                                 <div class="counter_w_image">
                                     <img src="<?php echo ($image_url2 !== '') ? $image_url2 : ''; ?>" 
                                 alt="<?php echo $name_widget2; ?>" />
@@ -215,26 +226,31 @@ function pg_counter_widgets_display($atts = []){
                                 <?php echo  $totalamt2; ?>
                                 </div>
                                 <div class="counter_w_title">
-                                    <?php echo $name_widget2; ?>
+                                   <h3><?php echo $name_widget2; ?></h3>
                                 </div>
                             </div>
-                            <div class="counter_widget">
-                                <div class="tickerNum hidden"></div>                         
+                            <div class="counter_widget">                       
                                 <div class="counter_w_image">
                                     <img src="<?php echo ($image_url3 !== '') ? $image_url3 : ''; ?>" 
                                 alt="<?php echo $name_widget3; ?>" />
                                 </div>
-                                <div id="totalAmt3">
+                                <div class="totalamt" id="totalAmt3">
                                 <?php echo  $totalamt3; ?>
                                 </div>
                                 <div class="counter_w_title">
-                                    <?php echo $name_widget3; ?>
+                                   <h3><?php echo $name_widget3; ?></h3>
                                 </div>
-                            </div>
+                            </div>                          
+                           
     
                             <?php
            
                         } else {
+
+                            ?>   
+                            <script type="text/javascript">
+                               
+                           <?php    
                           
                              $name_widget1 = get_post_meta($counter->ID, 'name_widget1', true); 
                              $name_widget2 = get_post_meta($counter->ID, 'name_widget2', true); 
@@ -258,8 +274,8 @@ function pg_counter_widgets_display($atts = []){
                              $image_id4 = get_post_meta($counter->ID, 'image_id4', true); 
 
                              $amt_widget1 = floatval($amt_widget1);
-                             $totalamt1 = round($savings_number * $amt_widget1);
-
+                             $totalamt1 = round($savings_number * $amt_widget1); 
+                         
                              $amt_widget2 = floatval($amt_widget2);
                              $totalamt2 = round($savings_number * $amt_widget2);
 
@@ -271,78 +287,79 @@ function pg_counter_widgets_display($atts = []){
  
 
                         ?>
+                                    
+                         </script>
+
                              <div class="counter_widget">
-                                <div class="tickerNum hidden"></div>
                                  <div class="counter_w_image">
                                  <img src="<?php echo ($image_url1 !== '') ? $image_url1 : ''; ?>" 
                                  alt="<?php echo $name_widget1 ?>" />
                                  </div>
-                                 <div id="totalAmt1">
+                                 <div class="totalamt" id="totalAmt1">
                                  <?php echo  $totalamt1; ?>
                                  </div>
                                  <div class="counter_w_title">
-                                 <?php echo $name_widget1; ?>
+                                 <h3><?php echo $name_widget1; ?> </h3>
                                  </div>
                               </div>
                               <div class="counter_widget">
-                                <div class="tickerNum hidden"></div>
                                  <div class="counter_w_image">
                                      <img src="<?php echo ($image_url2 !== '') ? $image_url2 : ''; ?>" 
                                  alt="<?php echo $name_widget2; ?>" />
                                  </div>
-                                 <div id="totalAmt2">
+                                 <div class="totalamt" id="totalAmt2">
                                  <?php echo  $totalamt2; ?>
                                  </div>
                                  <div class="counter_w_title">
-                                     <?php echo $name_widget2; ?>
+                                 <h3>    <?php echo $name_widget2; ?> </h3>
                                  </div>
                              </div>
                              <div class="counter_widget">
-                                <div class="tickerNum hidden"></div>
                                  <div class="counter_w_image">
                                      <img src="<?php echo ($image_url3 !== '') ? $image_url3 : ''; ?>" 
                                  alt="<?php echo $name_widget3; ?>" />
                                  </div>
                                  <div class="counter_w_count3">
                                  </div>
-                                 <div id="totalAmt3">
+                                 <div class="totalamt" id="totalAmt3">
                                  <?php echo  $totalamt3; ?>
                                  </div>
                                  <div class="counter_w_title">
-                                     <?php echo $name_widget3; ?>
+                                 <h3>   <?php echo $name_widget3; ?> </h3>
                                  </div>
                              </div>
                              <div class="counter_widget">
-                                <div class="tickerNum hidden"></div>
                                  <div class="counter_w_image">
                                      <img src="<?php echo ($image_url4 !== '') ? $image_url4 : ''; ?>" 
                                  alt="<?php echo $name_widget4; ?>" />
                                  </div>
-                                 <div id="totalAmt4">
+                                 <div class="totalamt" id="totalAmt4">
                                  <?php echo  $totalamt4; ?>
                                  </div>
                                  <div class="counter_w_title">
-                                     <?php echo $name_widget4; ?>
+                                 <h3>     <?php echo $name_widget4; ?> <h3>
                                  </div>
                              </div>
      
+
                         <?php    
 
                         }   
                         
                         ?>
-
-                        
-
-
-
+                       
                                                                      
                             </div>                
                         </div>                                
-                    </div>                    
+                    </div>
+                    <script type="text/javascript">
+                    runAnimations();
+                    </script>
                 
                     
-                <?php   endif;
+                <?php 
+
+                    endif;
 
                    }
 
