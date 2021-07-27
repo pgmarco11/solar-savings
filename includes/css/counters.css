@@ -1,0 +1,15 @@
+#counter_widgets label {
+    display: inline-block;
+    width: 15%;
+    text-align: left;
+}
+#widget_list ul {
+    border: 1px solid #c0c0c0;
+    padding: 15px 10px 5px;
+}
+#widget_list ul li input[type='text'] {
+    width: 50%;
+}
+#tickerNum1, #totalAmt1,#tickerNum2, #totalAmt2,#tickerNum3, #totalAmt3,#tickerNum4, #totalAmt4 {
+    display: inline;
+}

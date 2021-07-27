@@ -414,7 +414,8 @@ class CPT {
         // Default options.
         $defaults = array(
             'labels' => $labels,
-            'public' => true,
+            'public' => false,
+            'show_ui' => true,
             'rewrite' => array(
                 'slug' => $slug,
             )

@@ -1,0 +1,79 @@
+
+
+#counter_kwh {
+    margin: 0 auto;
+    text-align: center;
+    font-weight: 600;
+}
+#counter_kwh h2 {
+    font-weight: 600;
+}
+.counter_kwh_total {
+    font-size: 28px;
+}
+
+#counter_widgets {
+    margin: 0 auto 4% auto;
+}
+.counter_w_grid .counter_widget {
+    padding: 0 1rem;
+    margin: 0 auto;
+    max-width: 320px;
+}
+.counter_title h2 {
+    font-size: 40px;
+    font-family: inherit;
+    font-weight: 400;
+    padding: 0;
+    text-align: center;
+}
+.counter_description {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.grid_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.counter_w_grid a {
+    text-decoration: none;
+    color: inherit;
+    cursor: inherit;
+    text-align: center;
+}
+.counter_w_grid .totalamt {
+    font-weight: 700;
+    font-size:  42px;
+    line-height: normal;
+    text-align: center;
+}
+.counter_w_grid .counter_w_title h3 {
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center;
+}
+.counter_w_image {
+    width: 225px;
+    margin: 0 auto;
+}
+.counter_w_image img {
+    display: flex;
+    display: block;
+    border-radius: 100px;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+@media (max-width: 1300px){
+    .grid_container {
+        flex-direction: column;
+    }
+    .counter_w_grid .counter_widget {
+        padding: 0 0 2.5rem 0;
+    }
+}
