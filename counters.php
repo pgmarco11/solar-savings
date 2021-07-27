@@ -27,6 +27,9 @@ if ( ! defined('WPINC') ){
 */
 require plugin_dir_path( __FILE__ ) . 'includes/class.php';
 
+//shortcodes
+include( plugin_dir_path( __FILE__ ) . 'includes/shortcodes.php');	
+
 
 function run_counters(){	
 
@@ -61,9 +64,11 @@ function pg_counter_settings(){
 	if( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE ) return $post_id;
 
 	$starting_number = get_post_meta($post->ID, 'starting_number', true);	
-	$starting_date = get_post_meta($post->ID, 'starting_date', true);	
+	$starting_date = get_post_meta($post->ID, 'starting_date', true);
 	$increment_number = get_post_meta($post->ID, 'increment_number', true);	
 	$counters_description = get_post_meta($post->ID, 'counters_description', true);
+	$kwh_number_title = get_post_meta($post->ID, 'kwh_number_title', true);
+	$show_counter_title = get_post_meta($post->ID, 'show_counter_title', true);
 	$widget_id = get_post_meta($post->ID, 'widget_id', true);
 
 ?>
@@ -71,19 +76,24 @@ function pg_counter_settings(){
 
 		<ul>
 			<li>
+			<label>Cumulative Generation Title:</label>
+				<input name="kwh_number_title" type="text" value="<?php echo (isset($kwh_number_title) ? $kwh_number_title : ''); ?>" /><br>
+			</li>
+			<li><label>Show Counter Title:</label>
+				<input name="show_counter_title" type="checkbox" value="1" <?php checked( $show_counter_title, 1); ?>/><br>
+				</li>
+			<li>
 			<label>Starting Generation Number:</label>
-				<input name="starting_number" id="startingNumber" type="number" value="<?php echo isset($starting_number) ? $starting_number : ''; ?>" /><br>
+				<input name="starting_number" id="startingNumber" type="number" value="<?php echo (isset($starting_number) ? $starting_number : ''); ?>" /><br>
 			</li>
 			<li>
 			<label>From Date:</label>
-				<input name="starting_date" id="startingDate" type="date" value="<?php echo isset($starting_date) ? $starting_date : ''; ?>" /><br>
+				<input name="starting_date" id="startingDate" type="date" value="<?php echo (isset($starting_date) ? $starting_date : ''); ?>" /><br>
 			</li>
 
 			<li><label>Increment / Seconds:</label>
-				<input name="increment_number" id="incrementNumber" type="number" step="any" value="<?php echo isset($increment_number) ? $increment_number : ''; ?>" /><br>
+				<input name="increment_number" id="incrementNumber" type="number" step="any" value="<?php echo (isset($increment_number) ? $increment_number : ''); ?>" /><br>
 			</li>
-
-
 			<li>
 				<label># of Widgets: </label>
 									
@@ -104,20 +114,31 @@ function pg_counter_settings(){
 																																	
 				</select>	
 				</li>
+
 				<li><label>Counters Description:</label>
 				<br><br>
 				<?php 
 				wp_editor( htmlspecialchars_decode($counters_description), 'metabox_ID', $settings=array('textarea_name'=>'counters_description')); 
 				?>
 			</li>
+
 		</ul>		
 		
 
 		<div id="widget_settings">
 
+			<label>Shortcodes:</label>
+			<p>Copy and paste this code in any page or post you want to show the total Kwh Generated.</p>
+			<?php echo isset($post->post_title) ? '<code>[counter-widget-kwh title="' . $post->post_title . '"]</code>' : ''?><br><br>
+			<p>Copy and paste this code in any page or post you want to show this counter on.</p>
+			<?php echo isset($post->post_title) ? '<code>[counter-widget title="' . $post->post_title . '"]</code>' : ''?><br><br>
+			
+
 			<div id="widget_list">
 
 			</div>
+
+
 
 		</div>					
 
@@ -226,13 +247,13 @@ function pg_counter_settings(){
 							for (number;number<widgetID+1;number++) { 		
 									
 								if(number == 1){
-									newWidgets = '<ul><li><label>Name:</label><input name="name_widget'+number+'" value="<?php echo isset($name_widget1) ? $name_widget1 : ''; ?>" type="text" /><br></li><li><label>Amount:</label><div id="tickerNum'+number+'" class="tickerNum"><?php echo $savings_number; ?></div><span> x </span><input name="amt_widget'+number+'" id="amt_widget'+number+'" class="amt_widget" value="<?php echo isset($amt_widget1) ?  sprintf($amt_widget1) : ''; ?>" type="number" step="any" /><span> = </span><div id="totalAmt'+number+'" class="totalAmt" name="totalAmt'+number+'"><?php echo isset($totalamt1) ?  number_format($totalamt1) : ''; ?></div></li><li><label>Image:</label><br><br><textarea class="widefat" id="animation'+number+'" name="animation'+number+'" ><?php echo isset($animation1) ? $animation1 : ''; ?></textarea></li><li class="animation_image"><label>Image:</label><input type="text" name="image_url'+number+'" class="image_url'+number+'" value="<?php echo isset($image_url1) ? $image_url1 : ''; ?>" /><input type="text" name="image_id'+number+'" class="image_id'+number+'" value="<?php echo isset($image_id1) ? $image_id1 : ''; ?>" /><input class="my_clear_button'+number+'" type="button" value="Clear" /><input class="my_upl_button'+number+'" type="button" value="Upload File" /></li></ul>';
+									newWidgets = '<ul><li><label>Name:</label><input name="name_widget'+number+'" value="<?php echo (isset($name_widget1) ? $name_widget1 : ''); ?>" type="text" /><br></li><li><label>Amount:</label><div id="tickerNum'+number+'" class="tickerNum"><?php echo $savings_number; ?></div><span> x </span><input name="amt_widget'+number+'" id="amt_widget'+number+'" class="amt_widget" value="<?php echo (isset($amt_widget1) ?  sprintf($amt_widget1) : ''); ?>" type="number" step="any" /><span> = </span><div id="totalAmt'+number+'" class="totalAmt" name="totalAmt'+number+'"><?php echo (isset($totalamt1) ?  number_format($totalamt1) : ''); ?></div></li><li><label>Image:</label><br><br><textarea class="widefat" id="animation'+number+'" name="animation'+number+'" ><?php echo (isset($animation1) ? $animation1 : ''); ?></textarea></li><li class="animation_image"><label>Image:</label><input type="text" name="image_url'+number+'" class="image_url'+number+'" value="<?php echo (isset($image_url1) ? $image_url1 : ''); ?>" /><input type="hidden" name="image_id'+number+'" class="image_id'+number+'" value="<?php echo (isset($image_id1) ? $image_id1 : ''); ?>" /><input class="my_clear_button'+number+'" type="button" value="Clear" /><input class="my_upl_button'+number+'" type="button" value="Upload File" /></li></ul>';
 								} else if(number == 2){
-									newWidgets += '<ul><li><label>Name:</label><input name="name_widget'+number+'" value="<?php echo isset($name_widget2) ? $name_widget2 : ''; ?>" type="text" /><br></li><li><label>Amount:</label><div id="tickerNum'+number+'" class="tickerNum"><?php echo $savings_number; ?></div><span> x </span><input name="amt_widget'+number+'" id="amt_widget'+number+'" class="amt_widget" value="<?php echo isset($amt_widget2) ?  sprintf($amt_widget2) : ''; ?>" type="number" step="any" /><span> = </span><div id="totalAmt'+number+'" class="totalAmt" name="totalAmt'+number+'"><?php echo isset($totalamt2) ?  number_format($totalamt2) : ''; ?></div></li><li><label>Image:</label><br><br><textarea class="widefat" id="animation'+number+'" name="animation'+number+'" ><?php echo isset($animation2) ? $animation2 : ''; ?></textarea></li><li class="animation_image"><label>Image:</label><input type="text" name="image_url'+number+'" class="image_url'+number+'" value="<?php echo isset($image_url2) ? $image_url2 : ''; ?>" /><input type="text" name="image_id'+number+'" class="image_id'+number+'" value="<?php echo isset($image_id2) ? $image_id2 : ''; ?>" /><input class="my_clear_button'+number+'" type="button" value="Clear" /><input class="my_upl_button'+number+'" type="button" value="Upload File" /></li></ul>';
+									newWidgets += '<ul><li><label>Name:</label><input name="name_widget'+number+'" value="<?php echo (isset($name_widget2) ? $name_widget2 : ''); ?>" type="text" /><br></li><li><label>Amount:</label><div id="tickerNum'+number+'" class="tickerNum"><?php echo $savings_number; ?></div><span> x </span><input name="amt_widget'+number+'" id="amt_widget'+number+'" class="amt_widget" value="<?php echo (isset($amt_widget2) ?  sprintf($amt_widget2) : ''); ?>" type="number" step="any" /><span> = </span><div id="totalAmt'+number+'" class="totalAmt" name="totalAmt'+number+'"><?php echo (isset($totalamt2) ?  number_format($totalamt2) : ''); ?></div></li><li><label>Image:</label><br><br><textarea class="widefat" id="animation'+number+'" name="animation'+number+'" ><?php echo (isset($animation2) ? $animation2 : ''); ?></textarea></li><li class="animation_image"><label>Image:</label><input type="text" name="image_url'+number+'" class="image_url'+number+'" value="<?php echo (isset($image_url2) ? $image_url2 : ''); ?>" /><input type="hidden" name="image_id'+number+'" class="image_id'+number+'" value="<?php echo (isset($image_id2) ? $image_id2 : ''); ?>" /><input class="my_clear_button'+number+'" type="button" value="Clear" /><input class="my_upl_button'+number+'" type="button" value="Upload File" /></li></ul>';
 								} else if(number == 3){
-									newWidgets += '<ul><li><label>Name:</label><input name="name_widget'+number+'" value="<?php echo isset($name_widget3) ? $name_widget3 : ''; ?>" type="text" /><br></li><li><label>Amount:</label><div id="tickerNum'+number+'" class="tickerNum"><?php echo $savings_number; ?></div><span> x </span><input name="amt_widget'+number+'" id="amt_widget'+number+'" class="amt_widget" value="<?php echo isset($amt_widget3) ?  sprintf('%.9F',$amt_widget3) : ''; ?>" type="number" step="any" /><span> = </span><div id="totalAmt'+number+'" class="totalAmt" name="totalAmt'+number+'"><?php echo isset($totalamt3) ?  number_format($totalamt3) : ''; ?></div></li><li><label>Image:</label><br><br><textarea class="widefat" id="animation'+number+'" name="animation'+number+'" ><?php echo isset($animation3) ? $animation3 : ''; ?></textarea></li><li class="animation_image"><label>Image:</label><input type="text" name="image_url'+number+'" class="image_url'+number+'" value="<?php echo isset($image_url3) ? $image_url3 : ''; ?>" /><input type="text" name="image_id'+number+'" class="image_id'+number+'" value="<?php echo isset($image_id3) ? $image_id3 : ''; ?>" /><input class="my_clear_button'+number+'" type="button" value="Clear" /><input class="my_upl_button'+number+'" type="button" value="Upload File" /></li></ul>';
+									newWidgets += '<ul><li><label>Name:</label><input name="name_widget'+number+'" value="<?php echo (isset($name_widget3) ? $name_widget3 : ''); ?>" type="text" /><br></li><li><label>Amount:</label><div id="tickerNum'+number+'" class="tickerNum"><?php echo $savings_number; ?></div><span> x </span><input name="amt_widget'+number+'" id="amt_widget'+number+'" class="amt_widget" value="<?php echo (isset($amt_widget3) ?  sprintf('%.9F',$amt_widget3) : ''); ?>" type="number" step="any" /><span> = </span><div id="totalAmt'+number+'" class="totalAmt" name="totalAmt'+number+'"><?php echo (isset($totalamt3) ?  number_format($totalamt3) : ''); ?></div></li><li><label>Image:</label><br><br><textarea class="widefat" id="animation'+number+'" name="animation'+number+'" ><?php echo (isset($animation3) ? $animation3 : ''); ?></textarea></li><li class="animation_image"><label>Image:</label><input type="text" name="image_url'+number+'" class="image_url'+number+'" value="<?php echo (isset($image_url3) ? $image_url3 : ''); ?>" /><input type="hidden" name="image_id'+number+'" class="image_id'+number+'" value="<?php echo (isset($image_id3) ? $image_id3 : ''); ?>" /><input class="my_clear_button'+number+'" type="button" value="Clear" /><input class="my_upl_button'+number+'" type="button" value="Upload File" /></li></ul>';
 								} else {
-									newWidgets += '<ul><li><label>Name:</label><input name="name_widget'+number+'" value="<?php echo isset($name_widget4) ? $name_widget4 : ''; ?>" type="text" /><br></li><li><label>Amount:</label><div id="tickerNum'+number+'" class="tickerNum"><?php echo $savings_number; ?></div><span> x </span><input name="amt_widget'+number+'" id="amt_widget'+number+'" class="amt_widget" value="<?php echo isset($amt_widget4) ?  sprintf($amt_widget4) : ''; ?>" type="number" step="any" /><span> = </span><div id="totalAmt'+number+'" class="totalAmt" name="totalAmt'+number+'"><?php echo isset($totalamt4) ?  number_format($totalamt4) : ''; ?></div></li><li><label>Image:</label><br><br><textarea class="widefat" id="animation'+number+'" name="animation'+number+'" ><?php echo isset($animation4) ? $animation4 : ''; ?></textarea></li><li class="animation_image"><label>Image:</label><input type="text" name="image_url'+number+'" class="image_url'+number+'" value="<?php echo isset($image_url4) ? $image_url4 : ''; ?>" /><input type="text" name="image_id'+number+'" class="image_id'+number+'" value="<?php echo isset($image_id4) ? $image_id4 : ''; ?>" /><input class="my_clear_button'+number+'" type="button" value="Clear" /><input class="my_upl_button'+number+'" type="button" value="Upload File" /></li></ul>';
+									newWidgets += '<ul><li><label>Name:</label><input name="name_widget'+number+'" value="<?php echo (isset($name_widget4) ? $name_widget4 : ''); ?>" type="text" /><br></li><li><label>Amount:</label><div id="tickerNum'+number+'" class="tickerNum"><?php echo $savings_number; ?></div><span> x </span><input name="amt_widget'+number+'" id="amt_widget'+number+'" class="amt_widget" value="<?php echo (isset($amt_widget4) ?  sprintf($amt_widget4) : ''); ?>" type="number" step="any" /><span> = </span><div id="totalAmt'+number+'" class="totalAmt" name="totalAmt'+number+'"><?php echo (isset($totalamt4) ?  number_format($totalamt4) : ''); ?></div></li><li><label>Image:</label><br><br><textarea class="widefat" id="animation'+number+'" name="animation'+number+'" ><?php echo (isset($animation4) ? $animation4 : ''); ?></textarea></li><li class="animation_image"><label>Image:</label><input type="text" name="image_url'+number+'" class="image_url'+number+'" value="<?php echo (isset($image_url4) ? $image_url4 : ''); ?>" /><input type="hidden" name="image_id'+number+'" class="image_id'+number+'" value="<?php echo (isset($image_id4) ? $image_id4 : ''); ?>" /><input class="my_clear_button'+number+'" type="button" value="Clear" /><input class="my_upl_button'+number+'" type="button" value="Upload File" /></li></ul>';
 								}
 
 							}
@@ -283,27 +304,28 @@ function pg_counter_settings(){
 					for (number;number<widgetID+1;number++) { 
 										
 							if(number == 1){
-								widgets = '<ul><li><label>Name:</label><input name="name_widget'+number+'" value="<?php echo isset($name_widget1) ? $name_widget1 : ''; ?>" type="text" /><br></li><li><label>Amount:</label><div id="tickerNum'+number+'" class="tickerNum"><?php echo isset($savings_number) ? $savings_number : ''; ?></div><span> x </span><input name="amt_widget'+number+'" id="amt_widget'+number+'" class="amt_widget" value="<?php echo isset($amt_widget1) ? sprintf($amt_widget1) : ''; ?>" type="number" step="any" /><span> = </span><div id="totalAmt'+number+'" class="totalAmt" name="totalAmt'+number+'"><?php echo isset($totalamt1) ? number_format($totalamt1) : ''; ?></div></li><li><label>Image:</label><br><br><textarea class="widefat" id="animation'+number+'" name="animation'+number+'" ><?php echo isset($animation1) ? $animation1 : ''; ?></textarea></li><li class="animation_image"><label>Image:</label><input type="text" name="image_url'+number+'" class="image_url'+number+'" value="<?php echo isset($image_url1) ? $image_url1 : ''; ?>" /><input type="text" name="image_id'+number+'" class="image_id'+number+'" value="<?php echo isset($image_id1) ? $image_id1 : ''; ?>" /><input class="my_clear_button'+number+'" type="button" value="Clear" /><input class="my_upl_button'+number+'" type="button" value="Upload File" /></li></ul>';
+								widgets = '<ul><li><label>Name:</label><input name="name_widget'+number+'" value="<?php echo (isset($name_widget1) ? $name_widget1 : ''); ?>" type="text" /><br></li><li><label>Amount:</label><div id="tickerNum'+number+'" class="tickerNum"><?php echo isset($savings_number) ? $savings_number : ''; ?></div><span> x </span><input name="amt_widget'+number+'" id="amt_widget'+number+'" class="amt_widget" value="<?php echo (isset($amt_widget1) ? sprintf($amt_widget1) : ''); ?>" type="number" step="any" /><span> = </span><div id="totalAmt'+number+'" class="totalAmt" name="totalAmt'+number+'"><?php echo isset($totalamt1) ? number_format($totalamt1) : ''; ?></div></li><li><label>Image:</label><br><br><textarea class="widefat" id="animation'+number+'" name="animation'+number+'" ><?php echo (isset($animation1) ? $animation1 : ''); ?></textarea></li><li class="animation_image"><label>Image:</label><input type="text" name="image_url'+number+'" class="image_url'+number+'" value="<?php echo (isset($image_url1) ? $image_url1 : ''); ?>" /><input type="hidden" name="image_id'+number+'" class="image_id'+number+'" value="<?php echo (isset($image_id1) ? $image_id1 : ''); ?>" /><input class="my_clear_button'+number+'" type="button" value="Clear" /><input class="my_upl_button'+number+'" type="button" value="Upload File" /></li></ul>';
 							} else if(number == 2){
-								widgets += '<ul><li><label>Name:</label><input name="name_widget'+number+'" value="<?php echo isset($name_widget2) ? $name_widget2 : ''; ?>" type="text" /><br></li><li><label>Amount:</label><div id="tickerNum'+number+'" class="tickerNum"><?php echo isset($savings_number) ? $savings_number : ''; ?></div><span> x </span><input name="amt_widget'+number+'" id="amt_widget'+number+'" class="amt_widget" value="<?php echo isset($amt_widget2) ?  sprintf($amt_widget2) : ''; ?>" type="number" step="any" /><span> = </span><div id="totalAmt'+number+'" class="totalAmt" name="totalAmt'+number+'"><?php echo isset($totalamt2) ?  number_format($totalamt2) : ''; ?></div></li><li><label>Image:</label><br><br><textarea class="widefat" id="animation'+number+'" name="animation'+number+'" ><?php echo isset($animation2) ? $animation2 : ''; ?></textarea></li><li class="animation_image"><label>Image:</label><input type="text" name="image_url'+number+'" class="image_url'+number+'" value="<?php echo isset($image_url2) ? $image_url2 : ''; ?>" /><input type="text" name="image_id'+number+'" class="image_id'+number+'" value="<?php echo isset($image_id2) ? $image_id2 : ''; ?>" /><input class="my_clear_button'+number+'" type="button" value="Clear" /><input class="my_upl_button'+number+'" type="button" value="Upload File" /></li></ul>';
+								widgets += '<ul><li><label>Name:</label><input name="name_widget'+number+'" value="<?php echo (isset($name_widget2) ? $name_widget2 : ''); ?>" type="text" /><br></li><li><label>Amount:</label><div id="tickerNum'+number+'" class="tickerNum"><?php echo isset($savings_number) ? $savings_number : ''; ?></div><span> x </span><input name="amt_widget'+number+'" id="amt_widget'+number+'" class="amt_widget" value="<?php echo (isset($amt_widget2) ?  sprintf($amt_widget2) : ''); ?>" type="number" step="any" /><span> = </span><div id="totalAmt'+number+'" class="totalAmt" name="totalAmt'+number+'"><?php echo (isset($totalamt2) ?  number_format($totalamt2) : ''); ?></div></li><li><label>Image:</label><br><br><textarea class="widefat" id="animation'+number+'" name="animation'+number+'" ><?php echo (isset($animation2) ? $animation2 : ''); ?></textarea></li><li class="animation_image"><label>Image:</label><input type="text" name="image_url'+number+'" class="image_url'+number+'" value="<?php echo (isset($image_url2) ? $image_url2 : ''); ?>" /><input type="hidden" name="image_id'+number+'" class="image_id'+number+'" value="<?php echo (isset($image_id2) ? $image_id2 : ''); ?>" /><input class="my_clear_button'+number+'" type="button" value="Clear" /><input class="my_upl_button'+number+'" type="button" value="Upload File" /></li></ul>';
 							} else if(number == 3){
-								widgets += '<ul><li><label>Name:</label><input name="name_widget'+number+'" value="<?php echo isset($name_widget3) ? $name_widget3 : ''; ?>" type="text" /><br></li><li><label>Amount:</label><div id="tickerNum'+number+'" class="tickerNum"><?php echo isset($savings_number) ? $savings_number : ''; ?></div><span> x </span><input name="amt_widget'+number+'" id="amt_widget'+number+'" class="amt_widget" value="<?php echo isset($amt_widget3) ?  sprintf('%.9F',$amt_widget3) : ''; ?>" type="number" step="any" /><span> = </span><div id="totalAmt'+number+'" class="totalAmt" name="totalAmt'+number+'"><?php echo isset($totalamt3) ?  number_format($totalamt3) : ''; ?></div></li><li><label>Image:</label><br><br><textarea class="widefat" id="animation'+number+'" name="animation'+number+'" ><?php echo isset($animation3) ? $animation3 : ''; ?></textarea></li><li class="animation_image"><label>Image:</label><input type="text" name="image_url'+number+'" class="image_url'+number+'" value="<?php echo isset($image_url3) ? $image_url3 : ''; ?>" /><input type="text" name="image_id'+number+'" class="image_id'+number+'" value="<?php echo isset($image_id3) ? $image_id3 : ''; ?>" /><input class="my_clear_button'+number+'" type="button" value="Clear" /><input class="my_upl_button'+number+'" type="button" value="Upload File" /></li></ul>';
+								widgets += '<ul><li><label>Name:</label><input name="name_widget'+number+'" value="<?php echo (isset($name_widget3) ? $name_widget3 : ''); ?>" type="text" /><br></li><li><label>Amount:</label><div id="tickerNum'+number+'" class="tickerNum"><?php echo isset($savings_number) ? $savings_number : ''; ?></div><span> x </span><input name="amt_widget'+number+'" id="amt_widget'+number+'" class="amt_widget" value="<?php echo (isset($amt_widget3) ?  sprintf('%.9F',$amt_widget3) : ''); ?>" type="number" step="any" /><span> = </span><div id="totalAmt'+number+'" class="totalAmt" name="totalAmt'+number+'"><?php echo (isset($totalamt3) ?  number_format($totalamt3) : ''); ?></div></li><li><label>Image:</label><br><br><textarea class="widefat" id="animation'+number+'" name="animation'+number+'" ><?php echo (isset($animation3) ? $animation3 : ''); ?></textarea></li><li class="animation_image"><label>Image:</label><input type="text" name="image_url'+number+'" class="image_url'+number+'" value="<?php echo (isset($image_url3) ? $image_url3 : ''); ?>" /><input type="hidden" name="image_id'+number+'" class="image_id'+number+'" value="<?php echo (isset($image_id3) ? $image_id3 : ''); ?>" /><input class="my_clear_button'+number+'" type="button" value="Clear" /><input class="my_upl_button'+number+'" type="button" value="Upload File" /></li></ul>';
 							} else {
-								widgets += '<ul><li><label>Name:</label><input name="name_widget'+number+'" value="<?php echo isset($name_widget4) ? $name_widget4 : ''; ?>" type="text" /><br></li><li><label>Amount:</label><div id="tickerNum'+number+'" class="tickerNum"><?php echo isset($savings_number) ? $savings_number : ''; ?></div><span> x </span><input name="amt_widget'+number+'" id="amt_widget'+number+'" class="amt_widget" value="<?php echo isset($amt_widget4) ? sprintf($amt_widget4) : ''; ?>" type="number" step="any" /><span> = </span><div id="totalAmt'+number+'" class="totalAmt" name="totalAmt'+number+'"><?php echo isset($totalamt4) ?  number_format($totalamt4) : ''; ?></div></li><li><label>Image:</label><br><br><textarea class="widefat" id="animation'+number+'" name="animation'+number+'" ><?php echo isset($animation4) ? $animation4 : ''; ?></textarea></li><li class="animation_image"><label>Image:</label><input type="text" name="image_url'+number+'" class="image_url'+number+'" value="<?php echo isset($image_url4) ? $image_url4 : ''; ?>" /><input type="text" name="image_id'+number+'" class="image_id'+number+'" value="<?php echo isset($image_id4) ? $image_id4 : ''; ?>" /><input class="my_clear_button'+number+'" type="button" value="Clear" /><input class="my_upl_button'+number+'" type="button" value="Upload File" /></li></ul>';
+								widgets += '<ul><li><label>Name:</label><input name="name_widget'+number+'" value="<?php echo (isset($name_widget4) ? $name_widget4 : ''); ?>" type="text" /><br></li><li><label>Amount:</label><div id="tickerNum'+number+'" class="tickerNum"><?php echo isset($savings_number) ? $savings_number : ''; ?></div><span> x </span><input name="amt_widget'+number+'" id="amt_widget'+number+'" class="amt_widget" value="<?php echo isset($amt_widget4) ? sprintf($amt_widget4) : ''; ?>" type="number" step="any" /><span> = </span><div id="totalAmt'+number+'" class="totalAmt" name="totalAmt'+number+'"><?php echo (isset($totalamt4) ?  number_format($totalamt4) : ''); ?></div></li><li><label>Image:</label><br><br><textarea class="widefat" id="animation'+number+'" name="animation'+number+'" ><?php echo (isset($animation4) ? $animation4 : ''); ?></textarea></li><li class="animation_image"><label>Image:</label><input type="text" name="image_url'+number+'" class="image_url'+number+'" value="<?php echo (isset($image_url4) ? $image_url4 : ''); ?>" /><input type="hidden" name="image_id'+number+'" class="image_id'+number+'" value="<?php echo (isset($image_id4) ? $image_id4 : ''); ?>" /><input class="my_clear_button'+number+'" type="button" value="Clear" /><input class="my_upl_button'+number+'" type="button" value="Upload File" /></li></ul>';
 							}
 
 					}
 
 				} else {
 
-					widgets = '<ul><li>Select the number of widgets from the dropdown</li></ul>';
+					widgets = '<ul><li>Select the number of widgets from the dropdown and click the save/update button</li></ul>';
 
 				}	
 					
 					showWidgets.innerHTML = widgets;			
 			
 			</script>
-					
+
+				
 </div>
 <?php
 
@@ -319,6 +341,15 @@ function pg_counter_save($post_id){
 
 	} else {
 
+		if( isset($_POST['kwh_number_title']) ){
+			update_post_meta($post_id, "kwh_number_title", $_POST["kwh_number_title"]);
+		}
+		if( isset($_POST['show_counter_title']) ){
+			update_post_meta($post_id, "show_counter_title", true);
+		} else {
+			update_post_meta($post_id, "show_counter_title", false);
+		}
+		
 		if( isset($_POST['starting_number']) ){
 			update_post_meta($post_id, "starting_number", $_POST["starting_number"]);
 		}
@@ -326,9 +357,7 @@ function pg_counter_save($post_id){
 		if( isset($_POST['starting_date']) ){
 			update_post_meta($post_id, "starting_date", $_POST["starting_date"]);
 		}	
-		if( isset($_POST['kwh_number']) ){
-			update_post_meta($post_id, "kwh_number", $_POST["kwh_number"]);
-		}	
+
 		if( isset($_POST['increment_number']) ){
 			update_post_meta($post_id, "increment_number", $_POST["increment_number"]);
 		}	
@@ -409,8 +438,5 @@ function pg_counter_save($post_id){
 add_action('save_post', 'pg_counter_save');
 
 
-//shortcodes
-include( plugin_dir_path( __FILE__ ) . 'includes/shortcodes.php');	
 
 ?>
-

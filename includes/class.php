@@ -14,6 +14,7 @@ class Content
 		add_action( 'admin_enqueue_scripts', array( $this, 'register_admin_scripts'));
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_frontend_styles'), 999);
 		add_action( 'wp_enqueue_scripts', array( $this, 'register_frontend_scripts'));
+		add_action( 'wp_head', array( $this, 'register_meta_tag'));
 
         $this->load_dependecies();
         
@@ -45,7 +46,10 @@ class Content
 		wp_register_script( 'animation-counter',  plugin_dir_url( __FILE__ ) . 'js/counter.js' );
 		wp_enqueue_script( 'animation-counter' );
 
-	}	
+	}
+	public function register_meta_tag() {
+		?><meta name = "format-detection" content = "telephone=no"><?php
+	}
 
 
 }

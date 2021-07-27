@@ -1,8 +1,7 @@
-const counter = document.getElementById("counter_widgets");
 
 // How long you want the animation to take, in ms
 const animationDuration = 1000;
-// Calculate how long each ‘frame’ should last if we want to update the animation 60 times per second
+// Calculate how long each frame should last if we want to update the animation 60 times per second
 const frameDuration = 2000 / 60;
 // Use that to calculate how many frames we need to complete the animation
 const totalFrames = Math.round( animationDuration / frameDuration );
@@ -25,8 +24,12 @@ const animateCountUp = el => {
 
 		// If the current count has changed, update the element
 		if ( parseInt( el.innerHTML, 10 ) !== currentCount ) {
-			el.innerHTML = currentCount.toLocaleString("en-US");
+			let number = currentCount;
+			let str = number.toString();
+			str = str.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+			el.innerHTML = str;
 		}
+
 
 		// If we’ve reached our last frame, stop the animation
 		if ( frame === totalFrames ) {
@@ -35,7 +38,7 @@ const animateCountUp = el => {
 	}, frameDuration );
 };
 
-// Run the animation on all elements with a class of ‘countup’
+// Run the animation on all elements with a class of countup
 const runAnimations = () => {
 	const countupEls = document.querySelectorAll( '.totalamt' );
 	countupEls.forEach( animateCountUp );
