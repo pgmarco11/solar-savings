@@ -68,6 +68,7 @@
     width: 100%;
     height: auto;
     margin: 0 auto;
+    max-height:127px;
 }
 @media (max-width: 1300px){
     .grid_container {
