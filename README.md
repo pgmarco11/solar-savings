@@ -4,10 +4,10 @@ This WordPress plugin creates counter widgets to calculate Solar Savings and dis
 Instructions for use
 --------------------
 
-Copy and paste this code in any page or post you want to show the total Kwh Generated.
+Copy and paste shortcode in any page or post using the shortcode block in any page or post to show the total Kwh Generated.
 
 [counter-widget-kwh title="Total Savings"]
 
-Copy and paste this code in any page or post you want to show this counter on.
+Copy and paste this shortcode using the shortcode block in any page or post you want to show this counter on.
 
 [counter-widget title="Total Savings"]
