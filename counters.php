@@ -1,11 +1,8 @@
 <?php
 
 /*
- * Counter Widgets
- *
- *
- * Plugin Name:		Counter Widgets
- * Description:		This plugin creates counter widgets to be displayed on your site.
+ * Plugin Name:		Solar Savings Calculator
+ * Description:		This plugin creates counter widgets to calculate Solar Savings and displays it on the page or post.
  * Version:			0.0.1
  * Author:			Peter Giammarco
  * Author URI:		http://www.pgiammarco.com

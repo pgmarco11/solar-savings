@@ -7,6 +7,7 @@
 }
 #counter_kwh h2 {
     font-weight: 600;
+    font-family: inherit;
 }
 .counter_kwh_total {
     font-size: 28px;
@@ -20,12 +21,15 @@
     margin: 0 auto;
     max-width: 320px;
 }
+.counter_w_grid .counter_widget a:hover {
+    color: inherit;
+}
 .counter_title h2 {
     font-size: 40px;
     font-family: inherit;
     font-weight: 400;
     padding: 0;
-    text-align: center;
+    text-align: center;    
 }
 .counter_description {
     text-align: center;
@@ -50,7 +54,8 @@
 }
 .counter_w_grid .counter_w_title h3 {
     font-size: 20px;
-    font-weight: 400;
+    font-weight: 500;
+    font-family: inherit;
     text-align: center;
 }
 .counter_w_image {
