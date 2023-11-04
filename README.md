@@ -1,4 +1,4 @@
-# counter-widgets
+# solar-savings
 This WordPress plugin creates counter widgets to calculate Solar Savings and displays it on the page or post.
 
 Instructions for use
