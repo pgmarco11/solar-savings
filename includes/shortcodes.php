@@ -50,7 +50,7 @@ function pg_counter_widgets_display_kwh($atts = []){
             $increment_number = floatVal($increment_number);	
             $differenceSeconds = $now_date - $start_date;				
             $savings_number = ( ($differenceSeconds * $increment_number) + $starting_number); 
-            $savings_number = number_format(round($savings_number));
+            $savings_number = number_format($savings_number);
 
 
             if(isset($kwh_number_title)){
@@ -60,8 +60,8 @@ function pg_counter_widgets_display_kwh($atts = []){
             }
                 
             //return
-            return  $output1 . '<div class="counter_kwh_total">' . $savings_number . ' kWh </div>
-            </div>';
+            return  $output1 . '<div id="counter_kwh_total"><div class="counter_kwh_total">' . $savings_number . ' kWh </div>
+            </div></div>';
 
         endif;
         }
@@ -112,7 +112,7 @@ function pg_counter_widgets_display($atts = []){
                             <p>' . sprintf($counters_description) . '</p>
                             </div> 
                             <div class="counter_w_grid aligncenter">                        
-                            <div class="grid_container">';
+                            <div class="grid_container" id="counters">';
 
                     } else {
 
@@ -121,7 +121,7 @@ function pg_counter_widgets_display($atts = []){
                             <p>' . sprintf($counters_description) . '</p>
                             </div> 
                             <div class="counter_w_grid aligncenter">                        
-                            <div class="grid_container">';
+                            <div class="grid_container" id="counters">';
 
                     }  
                     
@@ -144,7 +144,7 @@ function pg_counter_widgets_display($atts = []){
                         $image_id1 = get_post_meta($counter->ID, 'image_id1', true); 
 
                         $amt_widget1 = floatval($amt_widget1);
-                        $totalamt1 = round($savings_number * $amt_widget1); 
+                        $totalamt1 = number_format($savings_number * $amt_widget1); 
 	
            
                         $output_2 = '<div class="counter_widget">
@@ -172,14 +172,13 @@ function pg_counter_widgets_display($atts = []){
                              $image_id2 = get_post_meta($counter->ID, 'image_id2', true); 
 
                              $amt_widget1 = floatval($amt_widget1);
-                             $totalamt1 = round($savings_number * $amt_widget1);
+                             $totalamt1 = number_format($savings_number * $amt_widget1);
                              
 
                              $amt_widget2 = floatval($amt_widget2);
-                             $totalamt2 = round($savings_number * $amt_widget2);
+                             $totalamt2 = number_format($savings_number * $amt_widget2);   
 
 
-                       
                                
  
                         $output_2 = '<div class="counter_widget"> 
@@ -222,13 +221,13 @@ function pg_counter_widgets_display($atts = []){
                             $image_id3 = get_post_meta($counter->ID, 'image_id3', true);
 
                             $amt_widget1 = floatval($amt_widget1);
-                             $totalamt1 = round($savings_number * $amt_widget1);
+                             $totalamt1 = number_format($savings_number * $amt_widget1);
 
                              $amt_widget2 = floatval($amt_widget2);
-                             $totalamt2 = round($savings_number * $amt_widget2);
+                             $totalamt2 = number_format($savings_number * $amt_widget2);
 
                              $amt_widget3 = floatval($amt_widget3);
-                             $totalamt3 = round($savings_number * $amt_widget3);
+                             $totalamt3 = number_format($savings_number * $amt_widget3);
 
  
   
@@ -288,16 +287,17 @@ function pg_counter_widgets_display($atts = []){
                              $image_id4 = get_post_meta($counter->ID, 'image_id4', true); 
 
                              $amt_widget1 = floatval($amt_widget1);
-                             $totalamt1 = round($savings_number * $amt_widget1); 
-                         
                              $amt_widget2 = floatval($amt_widget2);
-                             $totalamt2 = round($savings_number * $amt_widget2);
-
                              $amt_widget3 = floatval($amt_widget3);
-                             $totalamt3 = round($savings_number * $amt_widget3);
+                             $amt_widget4 = floatval($amt_widget4);                           
+                                 
+                                
+                                $totalamt1 = number_format($savings_number * $amt_widget1);
+                                $totalamt2 = number_format($savings_number * $amt_widget2);
+                                $totalamt3 = number_format($savings_number * $amt_widget3);
+                                $totalamt4 = number_format($savings_number * $amt_widget4);
 
-                             $amt_widget4 = floatval($amt_widget4);
-                             $totalamt4 = round($savings_number * $amt_widget4);
+                           
  
                             $output_2 =   '<div class="counter_widget">
                                  <div class="counter_w_image">
@@ -340,13 +340,13 @@ function pg_counter_widgets_display($atts = []){
                                  </div>
                              </div>';
 
-
                         }   
                         
                         //return
-                        return $output_1 . $output_2 . '</div></div></div>                        
-                        <script type="text/javascript">
+                        return $output_1 . $output_2 . '</div></div></div>
+                        <script>
                         runAnimations();
+
                         </script>';
 
                 endif;

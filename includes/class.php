@@ -45,6 +45,8 @@ class Content
         
 		wp_register_script( 'animation-counter',  plugin_dir_url( __FILE__ ) . 'js/counter.js' );
 		wp_enqueue_script( 'animation-counter' );
+		wp_register_script( 'counter-refresh',  plugin_dir_url( __FILE__ ) . 'js/refresh.js' );
+		wp_enqueue_script( 'counter-refresh' );
 
 	}
 	public function register_meta_tag() {
