@@ -51,6 +51,7 @@
     font-size:  42px;
     line-height: normal;
     text-align: center;
+    text-decoration: none;
 }
 .counter_w_grid .counter_w_title h3 {
     font-size: 20px;
@@ -61,6 +62,7 @@
 .counter_w_image {
     width: 225px;
     margin: 0 auto;
+    text-align: center;
 }
 .counter_w_image img {
     display: flex;

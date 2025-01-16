@@ -145,13 +145,16 @@ function pg_counter_widgets_display($atts = []){
 
                         $amt_widget1 = floatval($amt_widget1);
                         $totalamt1 = number_format($savings_number * $amt_widget1); 
+
+                        if($image_url1 && $image_url1 !== '') {
+                            $image_link = '<img src="' . $image_url1 . '" alt="' . $name_widget1 . '" />';
+                        } else {
+                            $image_link = '<h4>' . $name_widget1 .'</h4>';
+                        }
 	
            
                         $output_2 = '<div class="counter_widget">
-                            <div class="counter_w_image">
-                            <img src="' . (($image_url1 !== '') ? $image_url1 : '') .  '" 
-                            alt="' . $name_widget1 . '" />
-                            </div>
+                            <div class="counter_w_image">' . $image_link .'</div>
                             <a href="javascript:void(0);"><div class="totalamt" id="totalAmt1">' .  $totalamt1 . '</div></a>
                             <div class="counter_w_title">
                             <h3>' . $name_widget1 . ' </h3>
@@ -178,22 +181,28 @@ function pg_counter_widgets_display($atts = []){
                              $amt_widget2 = floatval($amt_widget2);
                              $totalamt2 = number_format($savings_number * $amt_widget2);   
 
+                             if($image_url1 && $image_url1 !== '') {
+                                $image_link = '<img src="' . $image_url1 . '" alt="' . $name_widget1 . '" />';
+                            } else {
+                                $image_link = '<h4>' . $name_widget1 .'</h4>';
+                            }
 
+                            if($image_url2 && $image_url2 !== '') {
+                                $image_link2 = '<img src="' . $image_url2 . '" alt="' . $name_widget2 . '" />';
+                            } else {
+                                $image_link2 = '<h4>' . $name_widget2 .'</h4>';
+                            }
                                
  
                         $output_2 = '<div class="counter_widget"> 
-                            <div class="counter_w_image">
-                            <img src="' . (($image_url1 !== '') ? $image_url1 : '') . '" alt="' . $name_widget1 . '" />
-                            </div>
+                            <div class="counter_w_image">' . $image_link . '</div>
                             <a href="javascript:void(0);"><div class="totalamt" id="totalAmt1">'. $totalamt1 . '</div></a>
                             <div class="counter_w_title">
                             <h3>' . $name_widget1 . '</h3>
                             </div>
                          </div>
                          <div class="counter_widget">
-                            <div class="counter_w_image">
-                                <img src="' . (($image_url2 !== '') ? $image_url2 : '') . '" alt="' . $name_widget2 . '" />
-                            </div>
+                            <div class="counter_w_image">' . $image_link2 . '</div>
                             <a href="javascript:void(0);"><div class="totalamt" id="totalAmt2">' . $totalamt2 . '</div></a>
                             <div class="counter_w_title">
                             <h3>' .  $name_widget2 . '</h3>
@@ -229,32 +238,44 @@ function pg_counter_widgets_display($atts = []){
                              $amt_widget3 = floatval($amt_widget3);
                              $totalamt3 = number_format($savings_number * $amt_widget3);
 
+                             if($image_url1 && $image_url1 !== '') {
+                                $image_link = '<img src="' . $image_url1 . '" alt="' . $name_widget1 . '" />';
+                            } else {
+                                $image_link = '<h4>' . $name_widget1 .'</h4>';
+                            }
+
+                            if($image_url2 && $image_url2 !== '') {
+                                $image_link2 = '<img src="' . $image_url2 . '" alt="' . $name_widget2 . '" />';
+                            } else {
+                                $image_link2 = '<h4>' . $name_widget2 .'</h4>';
+                            }
+
+                            if($image_url3 && $image_url3 !== '') {
+                                $image_link3 = '<img src="' . $image_url3 . '" alt="' . $name_widget3 . '" />';
+                            } else {
+                                $image_link3 = '<h4>' . $name_widget3 .'</h4>';
+                            }
+
+
  
   
                     
                              $output_2 =  '<div class="counter_widget">                               
-                                <div class="counter_w_image">
-                                <img src="' . (($image_url1 !== '') ? $image_url1 : '') . '"  alt="' . $name_widget1 . '" />
-                                </div>
+                                <div class="counter_w_image">' . $image_link .  '</div>
                                 <a href="javascript:void(0);"><div class="totalamt" id="totalAmt1">' .  $totalamt1 . '</div></a>
                                 <div class="counter_w_title">
                                 <h3>' . $name_widget1 . '</h3>
                                 </div>
                              </div>
                              <div class="counter_widget">                         
-                                <div class="counter_w_image">
-                                <img src="' . (($image_url2 !== '') ? $image_url2 : '') . '" 
-                                alt="' . $name_widget2 . '" />
-                                </div>
+                                <div class="counter_w_image">' . $image_link2 .  '</div>
                                 <a href="javascript:void(0);"><div class="totalamt" id="totalAmt2">' . $totalamt2 . '</div></a>
                                 <div class="counter_w_title">
                                    <h3>' . $name_widget2 . '</h3>
                                 </div>
                             </div>
                             <div class="counter_widget">                       
-                                <div class="counter_w_image">
-                                    <img src="' . (($image_url3 !== '') ? $image_url3 : '') . '" alt="' . $name_widget3 . '" />
-                                </div>
+                                <div class="counter_w_image">' . $image_link3 .  '</div>
                                 <a href="javascript:void(0);"><div class="totalamt" id="totalAmt3">' .  $totalamt3 . '</div></a>
                                 <div class="counter_w_title">
                                    <h3>' . $name_widget3 . '</h3>
@@ -297,43 +318,55 @@ function pg_counter_widgets_display($atts = []){
                                 $totalamt3 = number_format($savings_number * $amt_widget3);
                                 $totalamt4 = number_format($savings_number * $amt_widget4);
 
+                                if($image_url1 && $image_url1 !== '') {
+                                    $image_link = '<img src="' . $image_url1 . '" alt="' . $name_widget1 . '" />';
+                                } else {
+                                    $image_link = '<h4>' . $name_widget1 .'</h4>';
+                                }
+    
+                                if($image_url2 && $image_url2 !== '') {
+                                    $image_link2 = '<img src="' . $image_url2 . '" alt="' . $name_widget2 . '" />';
+                                } else {
+                                    $image_link2 = '<h4>' . $name_widget2 .'</h4>';
+                                }
+    
+                                if($image_url3 && $image_url3 !== '') {
+                                    $image_link3 = '<img src="' . $image_url3 . '" alt="' . $name_widget3 . '" />';
+                                } else {
+                                    $image_link3 = '<h4>' . $name_widget3 .'</h4>';
+                                }
+
+                                if($image_url4 && $image_url4 !== '') {
+                                    $image_link4 = '<img src="' . $image_url4 . '" alt="' . $name_widget4 . '" />';
+                                } else {
+                                    $image_link4 = '<h4>' . $name_widget4 .'</h4>';
+                                }
+
                            
  
                             $output_2 =   '<div class="counter_widget">
-                                 <div class="counter_w_image">
-                                 <img src="' . (($image_url1 !== '') ? $image_url1 : '') . '" 
-                                 alt="' . $name_widget1 . '" />
-                                 </div>
+                                 <div class="counter_w_image">' . $image_link .  '</div>
                                  <a href="javascript:void(0);"><div class="totalamt" id="totalAmt1">' .  $totalamt1 . '</div></a>
                                  <div class="counter_w_title">
                                  <h3>' . $name_widget1 . '</h3>
                                  </div>
                               </div>
                               <div class="counter_widget">
-                                 <div class="counter_w_image">
-                                     <img src="' . (($image_url2 !== '') ? $image_url2 : '') . '" 
-                                 alt="' . $name_widget2 . '" />
-                                 </div>
+                                 <div class="counter_w_image">' . $image_link2 .  '</div>
                                  <a href="javascript:void(0);"><div class="totalamt" id="totalAmt2">' . $totalamt2 . '</div></a>
                                  <div class="counter_w_title">
                                  <h3>' . $name_widget2 . '</h3>
                                  </div>
                              </div>
                              <div class="counter_widget">
-                                 <div class="counter_w_image">
-                                     <img src="' .  (($image_url3 !== '') ? $image_url3 : '') . '" 
-                                 alt="' . $name_widget3  . '" />
-                                 </div>
+                                 <div class="counter_w_image">' . $image_link3 .  '</div>
                                  <a href="javascript:void(0);"><div class="totalamt" id="totalAmt3">' . $totalamt3 . '</div></a>
                                  <div class="counter_w_title">
                                  <h3>' . $name_widget3 . '</h3>
                                  </div>
                              </div>
                              <div class="counter_widget">
-                                 <div class="counter_w_image">
-                                     <img src="' .  (($image_url4 !== '') ? $image_url4 : '') . '" 
-                                 alt="' . $name_widget4 . '" />
-                                 </div>
+                                 <div class="counter_w_image">' . $image_link4 .  '</div>
                                  <a href="javascript:void(0);"><div class="totalamt" id="totalAmt4">' . $totalamt4 . '</div></a>
                                  <div class="counter_w_title">
                                  <h3>' . $name_widget4 . '</h3>
